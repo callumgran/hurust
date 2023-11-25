@@ -55,8 +55,6 @@ void test_int_push_pop_get(void)
 
 	vector_push(&vector, &item2);
 
-	assert(vector_full(&vector));
-
 	vector_pop(&vector, 1, &pop);
 
 	assert(pop == 2);
@@ -104,8 +102,6 @@ void test_str_push_pop_get(void)
 	vector_push(&vector, &item2);
 
 	vector_push(&vector, &item3);
-
-	assert(vector_full(&vector));
 
 	vector_pop(&vector, 1, &pop);
 
@@ -244,11 +240,11 @@ void test_str_push_many_sort(void)
 
 int main(void)
 {
-	printf("Running static vector tests...\n");
+	printf("Running dynamic vector tests...\n");
 	test_int_push_pop_get();
 	test_str_push_pop_get();
 	test_int_push_many_sort();
 	test_str_push_many_sort();
-	printf("Completed static vector tests!\n");
+	printf("Completed dynamic vector tests!\n");
 	return 0;
 }

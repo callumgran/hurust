@@ -167,13 +167,6 @@
 // Methods
 
 /**
- * \brief     A macro for checking if an vector is full.
- * \note      This macro checks if an vector is full.
- * \param[in] _vector The vector to check.
- */
-#define vector_full(_vector) ({ (_vector)->size == (_vector)->cap; })
-
-/**
  * \brief     A macro for checking if an vector is empty.
  * \note      This macro checks if an vector is empty.
  * \param[in] _vector The vector to check.
