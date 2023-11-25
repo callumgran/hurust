@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/License-GPL--3.0-blue.svg)](LICENSE)
 
-HURUST is a versatile C collections library designed to simplify the handling of various data types and provide essential functions for sorting and manipulating collections. This library offers a collection of high-utility, reusable macros that enhance your C programming experience.
+HURUST is a versatile GNU-C collections library designed to simplify the handling of various data types and provide essential functions for sorting and manipulating collections. This library offers a collection of high-utility, reusable macros that enhance your C programming experience.
 
 ## Features
 
