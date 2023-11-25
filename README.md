@@ -65,6 +65,9 @@ HURUST collections are designed to be easy to use. Simply create a collection ob
 
 ```c
 #include <stdlib.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <assert.h>
 #include <hurust/functional/lambda.h>
 #include <hurust/static/vector.h>
 
