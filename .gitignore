@@ -59,3 +59,8 @@ dkms.conf
 .obj/
 
 # Ignore binary files
+array_test
+
+# Queue tests
+dynamic_queue_test
+static_queue_test
