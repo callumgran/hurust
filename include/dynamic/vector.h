@@ -50,7 +50,7 @@
  *            name as some types such as pointers and vectors cannot be used
  *            as struct names.
  */
-#define vector(type, struct_prefix)           \
+#define VECTOR(type, struct_prefix)           \
 	typedef struct struct_prefix##_vector_t { \
 		type *data;                          \
 		size_t size;                         \

@@ -20,6 +20,7 @@ TARGET_DQUEUE_TEST = dynamic_queue_test
 
 # Array types
 TARGET_ARRAY_TEST = array_test
+TARGET_VECTOR_TEST = vector_test
 
 all: $(TARGET)
 
@@ -45,8 +46,11 @@ squeue_test:
 array_test:
 	$(CC) ./test/static/array_test.c $(CFLAGS) -o $(TARGET_ARRAY_TEST)
 
+vector_test:
+	$(CC) ./test/dynamic/vector_test.c $(CFLAGS) -o $(TARGET_VECTOR_TEST)
+
 clean:
-	rm -rf $(OBJDIR) $(TARGET) $(TARGET_SQUEUE_TEST) $(TARGET_DQUEUE_TEST) $(TARGET_ARRAY_TEST)
+	rm -rf $(OBJDIR) $(TARGET) $(TARGET_SQUEUE_TEST) $(TARGET_DQUEUE_TEST) $(TARGET_ARRAY_TEST) $(TARGET_VECTOR_TEST)
 
 tags:
 	@ctags -R
