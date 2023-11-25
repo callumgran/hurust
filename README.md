@@ -20,15 +20,15 @@ HURUST is a versatile C collections library designed to simplify the handling of
 
 | Collection          | Abstract Datastructure             | Datatype                        |
 |----------------------|------------------------------------|---------------------------------|
-| Dynamic Vector       | List                               | Dynamic Array                   |
-| Dynamic Queue        | FIFO                               | Dynamic Circular Array          |
+| Vector       | List                               | Dynamic Array                   |
+| Queue        | FIFO                               | Dynamic Circular Array          |
 
 ### Static Collections
 
 | Collection          | Abstract Datastructure             | Datatype                        |
 |----------------------|------------------------------------|---------------------------------|
-| Static Array         | Array                              | Static Array                    |
-| Static Queue         | FIFO                               | Static Circular Array           |
+| Array         | Array                              | Static Array                    |
+| Queue         | FIFO                               | Static Circular Array           |
 
 ## Extra Features
 
