@@ -76,7 +76,7 @@ int main(void)
     struct int_vector_t vector;
 
     vector_init(&vector, HR_GLOBAL_ALLOCATOR, 2,
-    lambda(int, (const int a, const int b), { return a - b; }));
+        lambda(int, (const int a, const int b), { return a - b; }));
 
 
     // Push some elements onto the vector
