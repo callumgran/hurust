@@ -65,6 +65,8 @@ void test_int_push_pop_get(void)
 
 	assert(vector_empty(&vector));
 
+	vector_free(&vector);
+
 	printf("------------------------------------------\n");
 	printf("Completed integer push pop get vector tests\n");
 	printf("------------------------------------------\n");

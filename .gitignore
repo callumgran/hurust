@@ -60,6 +60,7 @@ dkms.conf
 
 # Ignore binary files
 array_test
+vector_test
 
 # Queue tests
 dynamic_queue_test
