@@ -72,33 +72,33 @@ int main(void)
 {
     // Create a vector of integers
     VECTOR(int, int);
-    
-	struct int_vector_t vector;
+
+    struct int_vector_t vector;
 
     vector_init(&vector, HR_GLOBAL_ALLOCATOR, 2,
-			   lambda(int, (const int a, const int b), { return a - b; }));
+    lambda(int, (const int a, const int b), { return a - b; }));
 
 
     // Push some elements onto the vector
     vector_push(&vector, &(int){1});
-	vector_push(&vector, &(int){3});
-	vector_push(&vector, &(int){2});
+    vector_push(&vector, &(int){3});
+    vector_push(&vector, &(int){2});
 
     // Sort the vector
     vector_sort(&vector);
 
     // Assert the vector is sorted
     assert(anon(
-		bool, (int *arr, size_t size),
-		{
-			for (size_t i = 0; i < (size - 1); i++) {
-				if (arr[i] > arr[i + 1]) {
-					return false;
-				}
-			}
-			return true;
-		},
-		vector_get_data(&vector), vector_get_size(&vector)));
+        bool, (int *arr, size_t size),
+        {
+            for (size_t i = 0; i < (size - 1); i++) {
+                if (arr[i] > arr[i + 1]) {
+                    return false;
+                }
+            }
+            return true;
+        },
+        vector_get_data(&vector), vector_get_size(&vector)));
 
     // Pop an element off the vector
     int pop;
