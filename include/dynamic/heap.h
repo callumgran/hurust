@@ -247,7 +247,7 @@
 /**
  * \brief     A macro for popping an item from a heap.
  * \note      This macro pops an item from a heap,
- *            it also ensures the next item is in the 
+ *            it also ensures the next item is in the
  *            correct position.
  * \param[in] _heap The heap to pop the item from.
  */
