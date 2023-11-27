@@ -71,7 +71,7 @@ HURUST collections are designed to be easy to use. Simply create a collection ob
 #include <stdio.h>
 #include <assert.h>
 #include <hurust/functional/lambda.h>
-#include <hurust/static/vector.h>
+#include <hurust/dynamic/vector.h>
 
 int main(void) 
 {
