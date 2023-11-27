@@ -17,19 +17,19 @@
 /*==========================================================================*
 
   FILE
-	lambda.h
+    lambda.h
 
   PROJECT
-	hurust generic library
+    hurust generic library
 
   DESCRIPTION
-	This file contains a macro for creating lambda functions.
+    This file contains a macro for creating lambda functions.
 
   PROGRAMMER
-	Callum Gran.
+    Callum Gran.
 
   MODIFICATIONS
-	25-Nov-23  C.Gran		Created file.
+    25-Nov-23  C.Gran		Created file.
 
  *==========================================================================*/
 
@@ -42,7 +42,7 @@
  * \param[in] func_body The body of the lambda function.
  */
 #define lambda(return_type, func_args, func_body) \
-	({ return_type __fn_t__ func_args func_body &__fn_t__; })
+    ({ return_type __fn_t__ func_args func_body &__fn_t__; })
 
 /**
  * \brief     A macro for defining an anonymous function.
@@ -54,4 +54,4 @@
  * \param[in] ... The arguments to the anonymous function.
  */
 #define anon(return_type, func_args, func_body, ...) \
-	lambda(return_type, func_args, func_body)(__VA_ARGS__)
+    lambda(return_type, func_args, func_body)(__VA_ARGS__)

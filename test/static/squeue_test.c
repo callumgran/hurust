@@ -23,105 +23,105 @@
 
 void test_int_push_pop_get(void)
 {
-	SQUEUE(int, int);
+    SQUEUE(int, int);
 
-	struct int_squeue_t queue;
-	squeue_init(&queue, HR_GLOBAL_ALLOCATOR, 2);
+    struct int_squeue_t queue;
+    squeue_init(&queue, HR_GLOBAL_ALLOCATOR, 2);
 
-	int item = 1;
-	int item2 = 2;
+    int item = 1;
+    int item2 = 2;
 
-	squeue_push(&queue, &item);
+    squeue_push(&queue, &item);
 
-	int get;
+    int get;
 
-	squeue_peek(&queue, &get);
+    squeue_peek(&queue, &get);
 
-	assert(get == 1);
+    assert(get == 1);
 
-	int pop;
+    int pop;
 
-	squeue_pop(&queue, &pop);
+    squeue_pop(&queue, &pop);
 
-	assert(pop == 1);
+    assert(pop == 1);
 
-	assert(squeue_empty(&queue));
+    assert(squeue_empty(&queue));
 
-	squeue_push(&queue, &item);
+    squeue_push(&queue, &item);
 
-	squeue_push(&queue, &item2);
+    squeue_push(&queue, &item2);
 
-	squeue_pop(&queue, &pop);
+    squeue_pop(&queue, &pop);
 
-	assert(pop == 1);
+    assert(pop == 1);
 
-	squeue_pop(&queue, &pop);
+    squeue_pop(&queue, &pop);
 
-	assert(pop == 2);
+    assert(pop == 2);
 
-	squeue_free(&queue);
+    squeue_free(&queue);
 
-	printf("------------------------------------------\n");
-	printf("Completed integer push pop get queue tests\n");
-	printf("------------------------------------------\n");
+    printf("------------------------------------------\n");
+    printf("Completed integer push pop get queue tests\n");
+    printf("------------------------------------------\n");
 }
 
 void test_str_push_pop_get(void)
 {
-	SQUEUE(char *, str);
+    SQUEUE(char *, str);
 
-	struct str_squeue_t queue;
-	squeue_init(&queue, HR_GLOBAL_ALLOCATOR, 3);
+    struct str_squeue_t queue;
+    squeue_init(&queue, HR_GLOBAL_ALLOCATOR, 3);
 
-	char *item = "Hello";
-	char *item2 = "World";
-	char *item3 = "Hello World";
+    char *item = "Hello";
+    char *item2 = "World";
+    char *item3 = "Hello World";
 
-	squeue_push(&queue, &item);
+    squeue_push(&queue, &item);
 
-	char *get;
+    char *get;
 
-	squeue_peek(&queue, &get);
+    squeue_peek(&queue, &get);
 
-	assert(strcmp(get, "Hello") == 0);
+    assert(strcmp(get, "Hello") == 0);
 
-	char *pop;
+    char *pop;
 
-	squeue_pop(&queue, &pop);
+    squeue_pop(&queue, &pop);
 
-	assert(strcmp(pop, "Hello") == 0);
+    assert(strcmp(pop, "Hello") == 0);
 
-	assert(squeue_empty(&queue));
+    assert(squeue_empty(&queue));
 
-	squeue_push(&queue, &item);
+    squeue_push(&queue, &item);
 
-	squeue_push(&queue, &item2);
+    squeue_push(&queue, &item2);
 
-	squeue_push(&queue, &item3);
+    squeue_push(&queue, &item3);
 
-	squeue_pop(&queue, &pop);
+    squeue_pop(&queue, &pop);
 
-	assert(strcmp(pop, "Hello") == 0);
+    assert(strcmp(pop, "Hello") == 0);
 
-	squeue_pop(&queue, &pop);
+    squeue_pop(&queue, &pop);
 
-	assert(strcmp(pop, "World") == 0);
+    assert(strcmp(pop, "World") == 0);
 
-	squeue_pop(&queue, &pop);
+    squeue_pop(&queue, &pop);
 
-	assert(strcmp(pop, "Hello World") == 0);
+    assert(strcmp(pop, "Hello World") == 0);
 
-	squeue_free(&queue);
+    squeue_free(&queue);
 
-	printf("-----------------------------------------\n");
-	printf("Completed string push pop get queue tests\n");
-	printf("-----------------------------------------\n");
+    printf("-----------------------------------------\n");
+    printf("Completed string push pop get queue tests\n");
+    printf("-----------------------------------------\n");
 }
 
 int main(void)
 {
-	printf("Running static queue tests...\n");
-	test_int_push_pop_get();
-	test_str_push_pop_get();
-	return 0;
+    printf("Running static queue tests...\n");
+    test_int_push_pop_get();
+    test_str_push_pop_get();
+    return 0;
 }

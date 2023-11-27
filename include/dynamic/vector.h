@@ -17,19 +17,19 @@
 /*==========================================================================*
 
   FILE
-	vector.h
+    vector.h
 
   PROJECT
-	hurust generic library
+    hurust generic library
 
   DESCRIPTION
-	This file contains the vector implementation, which is a dynamic array.
+    This file contains the vector implementation, which is a dynamic array.
 
   PROGRAMMER
-	Callum Gran.
+    Callum Gran.
 
   MODIFICATIONS
-	25-Nov-23  C.Gran		Created file.
+    25-Nov-23  C.Gran		Created file.
 
  *==========================================================================*/
 #ifndef HURUST_vector_H
@@ -51,13 +51,13 @@
  *            as struct names.
  */
 #define VECTOR(type, struct_prefix)           \
-	typedef struct struct_prefix##_vector_t { \
-		type *data;                          \
-		size_t size;                         \
-		size_t cap;                          \
-		int (*cmp)(const type, const type);  \
-		struct hr_allocator_t *allocator;    \
-	} struct_prefix##_vector_t;
+    typedef struct struct_prefix##_vector_t { \
+        type *data;                           \
+        size_t size;                          \
+        size_t cap;                           \
+        int (*cmp)(const type, const type);   \
+        struct hr_allocator_t *allocator;     \
+    } struct_prefix##_vector_t;
 
 /**
  * \brief     A macro for initializing an vector.
@@ -68,14 +68,15 @@
  * \param[in] _cap The starting capacity of the vector.
  * \param[in] _cmp The comparison function for sorting and searching.
  */
-#define vector_init(_vector, _allocator, _cap, _cmp)                                               \
-	({                                                                                           \
-		(_vector)->allocator = (_allocator);                                                      \
-		(_vector)->cap = (_cap);                                                                  \
-		(_vector)->size = 0;                                                                      \
-		(_vector)->cmp = (_cmp);                                                                  \
-		(_vector)->data = HR_ALLOC((_vector)->allocator, sizeof(*(_vector)->data) * (_vector)->cap); \
-	})
+#define vector_init(_vector, _allocator, _cap, _cmp)                                   \
+    ({                                                                                 \
+        (_vector)->allocator = (_allocator);                                           \
+        (_vector)->cap = (_cap);                                                       \
+        (_vector)->size = 0;                                                           \
+        (_vector)->cmp = (_cmp);                                                       \
+        (_vector)->data =                                                              \
+            HR_ALLOC((_vector)->allocator, sizeof(*(_vector)->data) * (_vector)->cap); \
+    })
 
 /**
  * \brief     A macro for freeing an vector.
@@ -180,15 +181,15 @@
  * \param[in] _i The index of the item to pop.
  * \param[in] _ret The item to pop from the vector.
  */
-#define vector_pop(_vector, _i, _ret)                         \
-	({                                                      \
-		*(_ret) = (_vector)->data[(_i)];                     \
-		(_vector)->size--;                                   \
-		for (size_t _j = (_i); _j < (_vector)->size; _j++) { \
-			(_vector)->data[_j] = (_vector)->data[_j + 1];    \
-		}                                                   \
-		_reduce_cap(_vector);                                \
-	})
+#define vector_pop(_vector, _i, _ret)                        \
+    ({                                                       \
+        *(_ret) = (_vector)->data[(_i)];                     \
+        (_vector)->size--;                                   \
+        for (size_t _j = (_i); _j < (_vector)->size; _j++) { \
+            (_vector)->data[_j] = (_vector)->data[_j + 1];   \
+        }                                                    \
+        _reduce_cap(_vector);                                \
+    })
 
 /**
  * \brief     A macro for removing an item from an vector.
@@ -198,13 +199,13 @@
  * \param[in] _item The item to remove.
  */
 #define vector_remove(_vector, _ret, _item)                        \
-	({                                                           \
-		size_t _i = 0;                                           \
-		for (; _i < (_vector)->size; _i++)                        \
-			if ((_vector)->cmp((_vector)->data[_i], (_item)) == 0) \
-				break;                                           \
-		vector_pop(_vector, _ret, _i);                             \
-	})
+    ({                                                             \
+        size_t _i = 0;                                             \
+        for (; _i < (_vector)->size; _i++)                         \
+            if ((_vector)->cmp((_vector)->data[_i], (_item)) == 0) \
+                break;                                             \
+        vector_pop(_vector, _ret, _i);                             \
+    })
 
 /**
  * \brief     A macro for getting an item from an vector.
@@ -231,11 +232,11 @@
  * \param[in] _item The item to push to the vector.
  */
 #define vector_push(_vector, _item)                  \
-	({                                             \
-		_ensure_cap(_vector);                       \
-		(_vector)->data[(_vector)->size] = *(_item); \
-		(_vector)->size++;                          \
-	})
+    ({                                               \
+        _ensure_cap(_vector);                        \
+        (_vector)->data[(_vector)->size] = *(_item); \
+        (_vector)->size++;                           \
+    })
 
 /**
  * \brief     A macro for sorting an vector.
@@ -252,13 +253,13 @@
  * \param[in] _ret The maximum item in the vector.
  */
 #define vector_max(_vector, _ret)                                 \
-	({                                                          \
-		*(_ret) = (_vector)->data[0];                            \
-		for (size_t _i = 1; _i < (_vector)->size; _i++) {        \
-			if ((_vector)->cmp(*(_ret), (_vector)->data[_i]) < 0) \
-				*(_ret) = (_vector)->data[_i];                   \
-		}                                                       \
-	})
+    ({                                                            \
+        *(_ret) = (_vector)->data[0];                             \
+        for (size_t _i = 1; _i < (_vector)->size; _i++) {         \
+            if ((_vector)->cmp(*(_ret), (_vector)->data[_i]) < 0) \
+                *(_ret) = (_vector)->data[_i];                    \
+        }                                                         \
+    })
 
 /**
  * \brief     A macro for getting the minimum item in an vector.
@@ -267,13 +268,13 @@
  * \param[in] _ret The minimum item in the vector.
  */
 #define vector_min(_vector, _ret)                                 \
-	({                                                          \
-		*(_ret) = (_vector)->data[0];                            \
-		for (size_t _i = 1; _i < (_vector)->size; _i++) {        \
-			if ((_vector)->cmp(*(_ret), (_vector)->data[_i]) > 0) \
-				*(_ret) = (_vector)->data[_i];                   \
-		}                                                       \
-	})
+    ({                                                            \
+        *(_ret) = (_vector)->data[0];                             \
+        for (size_t _i = 1; _i < (_vector)->size; _i++) {         \
+            if ((_vector)->cmp(*(_ret), (_vector)->data[_i]) > 0) \
+                *(_ret) = (_vector)->data[_i];                    \
+        }                                                         \
+    })
 
 /**
  * \brief     A macro for performing a for each loop on an vector.
@@ -281,11 +282,11 @@
  * \param[in] _vector The vector to perform the for each loop on.
  * \param[in] _func The function to perform on each item in the vector.
  */
-#define vector_foreach(_vector, _func)                     \
-	({                                                   \
-		for (size_t _i = 0; _i < (_vector)->size; _i++) { \
-			_func(&(_vector)->data[_i]);                  \
-		}                                                \
-	})
+#define vector_foreach(_vector, _func)                    \
+    ({                                                    \
+        for (size_t _i = 0; _i < (_vector)->size; _i++) { \
+            _func(&(_vector)->data[_i]);                  \
+        }                                                 \
+    })
 
 #endif // HURUST_vector_H

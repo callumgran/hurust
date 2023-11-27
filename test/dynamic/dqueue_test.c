@@ -23,105 +23,105 @@
 
 void test_int_push_pop_get(void)
 {
-	DQUEUE(int, int);
+    DQUEUE(int, int);
 
-	struct int_dqueue_t queue;
-	dqueue_init(&queue, HR_GLOBAL_ALLOCATOR, 1);
+    struct int_dqueue_t queue;
+    dqueue_init(&queue, HR_GLOBAL_ALLOCATOR, 1);
 
-	int item = 1;
-	int item2 = 2;
+    int item = 1;
+    int item2 = 2;
 
-	dqueue_push(&queue, &item);
+    dqueue_push(&queue, &item);
 
-	int get;
+    int get;
 
-	dqueue_peek(&queue, &get);
+    dqueue_peek(&queue, &get);
 
-	assert(get == 1);
+    assert(get == 1);
 
-	int pop;
+    int pop;
 
-	dqueue_pop(&queue, &pop);
+    dqueue_pop(&queue, &pop);
 
-	assert(pop == 1);
+    assert(pop == 1);
 
-	assert(dqueue_empty(&queue));
+    assert(dqueue_empty(&queue));
 
-	dqueue_push(&queue, &item);
+    dqueue_push(&queue, &item);
 
-	dqueue_push(&queue, &item2);
+    dqueue_push(&queue, &item2);
 
-	dqueue_pop(&queue, &pop);
+    dqueue_pop(&queue, &pop);
 
-	assert(pop == 1);
+    assert(pop == 1);
 
-	dqueue_pop(&queue, &pop);
+    dqueue_pop(&queue, &pop);
 
-	assert(pop == 2);
+    assert(pop == 2);
 
-	dqueue_free(&queue);
+    dqueue_free(&queue);
 
-	printf("------------------------------------------\n");
-	printf("Completed integer push pop get queue tests\n");
-	printf("------------------------------------------\n");
+    printf("------------------------------------------\n");
+    printf("Completed integer push pop get queue tests\n");
+    printf("------------------------------------------\n");
 }
 
 void test_str_push_pop_get(void)
 {
-	DQUEUE(char *, str);
+    DQUEUE(char *, str);
 
-	struct str_dqueue_t queue;
-	dqueue_init(&queue, HR_GLOBAL_ALLOCATOR, 2);
+    struct str_dqueue_t queue;
+    dqueue_init(&queue, HR_GLOBAL_ALLOCATOR, 2);
 
-	char *item = "Hello";
-	char *item2 = "World";
-	char *item3 = "Hello World";
+    char *item = "Hello";
+    char *item2 = "World";
+    char *item3 = "Hello World";
 
-	dqueue_push(&queue, &item);
+    dqueue_push(&queue, &item);
 
-	char *get;
+    char *get;
 
-	dqueue_peek(&queue, &get);
+    dqueue_peek(&queue, &get);
 
-	assert(strcmp(get, "Hello") == 0);
+    assert(strcmp(get, "Hello") == 0);
 
-	char *pop;
+    char *pop;
 
-	dqueue_pop(&queue, &pop);
+    dqueue_pop(&queue, &pop);
 
-	assert(strcmp(pop, "Hello") == 0);
+    assert(strcmp(pop, "Hello") == 0);
 
-	assert(dqueue_empty(&queue));
+    assert(dqueue_empty(&queue));
 
-	dqueue_push(&queue, &item);
+    dqueue_push(&queue, &item);
 
-	dqueue_push(&queue, &item2);
+    dqueue_push(&queue, &item2);
 
-	dqueue_push(&queue, &item3);
+    dqueue_push(&queue, &item3);
 
-	dqueue_pop(&queue, &pop);
+    dqueue_pop(&queue, &pop);
 
-	assert(strcmp(pop, "Hello") == 0);
+    assert(strcmp(pop, "Hello") == 0);
 
-	dqueue_pop(&queue, &pop);
+    dqueue_pop(&queue, &pop);
 
-	assert(strcmp(pop, "World") == 0);
+    assert(strcmp(pop, "World") == 0);
 
-	dqueue_pop(&queue, &pop);
+    dqueue_pop(&queue, &pop);
 
-	assert(strcmp(pop, "Hello World") == 0);
+    assert(strcmp(pop, "Hello World") == 0);
 
-	dqueue_free(&queue);
+    dqueue_free(&queue);
 
-	printf("-----------------------------------------\n");
-	printf("Completed string push pop get queue tests\n");
-	printf("-----------------------------------------\n");
+    printf("-----------------------------------------\n");
+    printf("Completed string push pop get queue tests\n");
+    printf("-----------------------------------------\n");
 }
 
 int main(void)
 {
-	printf("Running dynamic queue tests...\n");
-	test_int_push_pop_get();
-	test_str_push_pop_get();
-	return 0;
+    printf("Running dynamic queue tests...\n");
+    test_int_push_pop_get();
+    test_str_push_pop_get();
+    return 0;
 }

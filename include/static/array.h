@@ -17,21 +17,21 @@
 /*==========================================================================*
 
   FILE
-	array.h
+    array.h
 
   PROJECT
-	hurust generic library
+    hurust generic library
 
   DESCRIPTION
-	This file contains the array structure and methods. The array structure
-	is an expanded version of the C-array, with a few extra features such
-	as keeping track of size and being able to sort itself.
+    This file contains the array structure and methods. The array structure
+    is an expanded version of the C-array, with a few extra features such
+    as keeping track of size and being able to sort itself.
 
   PROGRAMMER
-	Callum Gran.
+    Callum Gran.
 
   MODIFICATIONS
-	21-Nov-23  C.Gran		Created file.
+    21-Nov-23  C.Gran		Created file.
 
  *==========================================================================*/
 #ifndef HURUST_ARRAY_H
@@ -53,13 +53,13 @@
  *            as struct names.
  */
 #define ARRAY(type, struct_prefix)           \
-	typedef struct struct_prefix##_array_t { \
-		type *data;                          \
-		size_t size;                         \
-		size_t cap;                          \
-		int (*cmp)(const type, const type);  \
-		struct hr_allocator_t *allocator;    \
-	} struct_prefix##_array_t;
+    typedef struct struct_prefix##_array_t { \
+        type *data;                          \
+        size_t size;                         \
+        size_t cap;                          \
+        int (*cmp)(const type, const type);  \
+        struct hr_allocator_t *allocator;    \
+    } struct_prefix##_array_t;
 
 /**
  * \brief     A macro for initializing an array.
@@ -71,13 +71,13 @@
  * \param[in] _cmp The comparison function for sorting and searching.
  */
 #define array_init(_array, _allocator, _cap, _cmp)                                               \
-	({                                                                                           \
-		(_array)->allocator = (_allocator);                                                      \
-		(_array)->cap = (_cap);                                                                  \
-		(_array)->size = 0;                                                                      \
-		(_array)->cmp = (_cmp);                                                                  \
-		(_array)->data = HR_ALLOC((_array)->allocator, sizeof(*(_array)->data) * (_array)->cap); \
-	})
+    ({                                                                                           \
+        (_array)->allocator = (_allocator);                                                      \
+        (_array)->cap = (_cap);                                                                  \
+        (_array)->size = 0;                                                                      \
+        (_array)->cmp = (_cmp);                                                                  \
+        (_array)->data = HR_ALLOC((_array)->allocator, sizeof(*(_array)->data) * (_array)->cap); \
+    })
 
 /**
  * \brief     A macro for freeing an array.
@@ -190,13 +190,13 @@
  * \param[in] _ret The item to pop from the array.
  */
 #define array_pop(_array, _i, _ret)                         \
-	({                                                      \
-		*(_ret) = (_array)->data[(_i)];                     \
-		(_array)->size--;                                   \
-		for (size_t _j = (_i); _j < (_array)->size; _j++) { \
-			(_array)->data[_j] = (_array)->data[_j + 1];    \
-		}                                                   \
-	})
+    ({                                                      \
+        *(_ret) = (_array)->data[(_i)];                     \
+        (_array)->size--;                                   \
+        for (size_t _j = (_i); _j < (_array)->size; _j++) { \
+            (_array)->data[_j] = (_array)->data[_j + 1];    \
+        }                                                   \
+    })
 
 /**
  * \brief     A macro for removing an item from an array.
@@ -206,13 +206,13 @@
  * \param[in] _item The item to remove.
  */
 #define array_remove(_array, _ret, _item)                        \
-	({                                                           \
-		size_t _i = 0;                                           \
-		for (; _i < (_array)->size; _i++)                        \
-			if ((_array)->cmp((_array)->data[_i], (_item)) == 0) \
-				break;                                           \
-		array_pop(_array, _ret, _i);                             \
-	})
+    ({                                                           \
+        size_t _i = 0;                                           \
+        for (; _i < (_array)->size; _i++)                        \
+            if ((_array)->cmp((_array)->data[_i], (_item)) == 0) \
+                break;                                           \
+        array_pop(_array, _ret, _i);                             \
+    })
 
 /**
  * \brief     A macro for getting an item from an array.
@@ -239,10 +239,10 @@
  * \param[in] _item The item to push to the array.
  */
 #define array_push(_array, _item)                  \
-	({                                             \
-		(_array)->data[(_array)->size] = *(_item); \
-		(_array)->size++;                          \
-	})
+    ({                                             \
+        (_array)->data[(_array)->size] = *(_item); \
+        (_array)->size++;                          \
+    })
 
 /**
  * \brief     A macro for sorting an array.
@@ -259,13 +259,13 @@
  * \param[in] _ret The maximum item in the array.
  */
 #define array_max(_array, _ret)                                 \
-	({                                                          \
-		*(_ret) = (_array)->data[0];                            \
-		for (size_t _i = 1; _i < (_array)->size; _i++) {        \
-			if ((_array)->cmp(*(_ret), (_array)->data[_i]) < 0) \
-				*(_ret) = (_array)->data[_i];                   \
-		}                                                       \
-	})
+    ({                                                          \
+        *(_ret) = (_array)->data[0];                            \
+        for (size_t _i = 1; _i < (_array)->size; _i++) {        \
+            if ((_array)->cmp(*(_ret), (_array)->data[_i]) < 0) \
+                *(_ret) = (_array)->data[_i];                   \
+        }                                                       \
+    })
 
 /**
  * \brief     A macro for getting the minimum item in an array.
@@ -274,13 +274,13 @@
  * \param[in] _ret The minimum item in the array.
  */
 #define array_min(_array, _ret)                                 \
-	({                                                          \
-		*(_ret) = (_array)->data[0];                            \
-		for (size_t _i = 1; _i < (_array)->size; _i++) {        \
-			if ((_array)->cmp(*(_ret), (_array)->data[_i]) > 0) \
-				*(_ret) = (_array)->data[_i];                   \
-		}                                                       \
-	})
+    ({                                                          \
+        *(_ret) = (_array)->data[0];                            \
+        for (size_t _i = 1; _i < (_array)->size; _i++) {        \
+            if ((_array)->cmp(*(_ret), (_array)->data[_i]) > 0) \
+                *(_ret) = (_array)->data[_i];                   \
+        }                                                       \
+    })
 
 /**
  * \brief     A macro for performing a for each loop on an array.
@@ -289,10 +289,10 @@
  * \param[in] _func The function to perform on each item in the array.
  */
 #define array_foreach(_array, _func)                     \
-	({                                                   \
-		for (size_t _i = 0; _i < (_array)->size; _i++) { \
-			_func(&(_array)->data[_i]);                  \
-		}                                                \
-	})
+    ({                                                   \
+        for (size_t _i = 0; _i < (_array)->size; _i++) { \
+            _func(&(_array)->data[_i]);                  \
+        }                                                \
+    })
 
 #endif // HURUST_ARRAY_H

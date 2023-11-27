@@ -17,20 +17,20 @@
 /*==========================================================================*
 
   FILE
-	dqueue.h
+    dqueue.h
 
   PROJECT
-	hurust generic library
+    hurust generic library
 
   DESCRIPTION
-	This file contains the dynamic queue data structure and macros for using it.
-	The queue is a circular buffer, and is not thread safe.
+    This file contains the dynamic queue data structure and macros for using it.
+    The queue is a circular buffer, and is not thread safe.
 
   PROGRAMMER
-	Callum Gran.
+    Callum Gran.
 
   MODIFICATIONS
-	21-Nov-23  C.Gran		Created file.
+    21-Nov-23  C.Gran		Created file.
 
  *==========================================================================*/
 #ifndef HURUST_DYNAMIC_QUEUE_H
@@ -51,14 +51,14 @@
  *            as struct names.
  */
 #define DQUEUE(type, struct_prefix)           \
-	typedef struct struct_prefix##_dqueue_t { \
-		type *data;                           \
-		size_t start;                         \
-		size_t end;                           \
-		size_t size;                          \
-		size_t cap;                           \
-		struct hr_allocator_t *allocator;     \
-	} struct_prefix##_dqueue_t;
+    typedef struct struct_prefix##_dqueue_t { \
+        type *data;                           \
+        size_t start;                         \
+        size_t end;                           \
+        size_t size;                          \
+        size_t cap;                           \
+        struct hr_allocator_t *allocator;     \
+    } struct_prefix##_dqueue_t;
 
 /**
  * \brief     A macro for initializing a queue.
@@ -69,14 +69,14 @@
  * \param[in] _cap The starting capacity of the queue.
  */
 #define dqueue_init(_queue, _allocator, _cap)                                                    \
-	({                                                                                           \
-		(_queue)->allocator = (_allocator);                                                      \
-		(_queue)->cap = (_cap);                                                                  \
-		(_queue)->size = 0;                                                                      \
-		(_queue)->start = 0;                                                                     \
-		(_queue)->end = 0;                                                                       \
-		(_queue)->data = HR_ALLOC((_queue)->allocator, sizeof(*(_queue)->data) * (_queue)->cap); \
-	})
+    ({                                                                                           \
+        (_queue)->allocator = (_allocator);                                                      \
+        (_queue)->cap = (_cap);                                                                  \
+        (_queue)->size = 0;                                                                      \
+        (_queue)->start = 0;                                                                     \
+        (_queue)->end = 0;                                                                       \
+        (_queue)->data = HR_ALLOC((_queue)->allocator, sizeof(*(_queue)->data) * (_queue)->cap); \
+    })
 
 /**
  * \brief     A macro for freeing a queue.
@@ -199,11 +199,11 @@
  * \param[in] _ret The variable to store the popped item in.
  */
 #define dqueue_pop(_queue, _ret)                                 \
-	({                                                           \
-		*(_ret) = (_queue)->data[(_queue)->start];               \
-		(_queue)->start = ((_queue)->start + 1) % (_queue)->cap; \
-		(_queue)->size--;                                        \
-	})
+    ({                                                           \
+        *(_ret) = (_queue)->data[(_queue)->start];               \
+        (_queue)->start = ((_queue)->start + 1) % (_queue)->cap; \
+        (_queue)->size--;                                        \
+    })
 
 /**
  * \brief     A macro for pushing an item to a queue.
@@ -212,23 +212,23 @@
  * \param[in] _item The item to push.
  */
 #define dqueue_push(_queue, _item)                                                \
-	({                                                                            \
-		if ((_queue)->size == (_queue)->cap) {                                    \
-			(_queue)->cap *= 2;                                                   \
-			(_queue)->data = HR_REALLOC((_queue)->allocator, (_queue)->data,      \
-										sizeof(*(_queue)->data) * (_queue)->cap); \
-			if ((_queue)->start >= (_queue)->end) {                               \
-				size_t i = 0;                                                     \
-				for (i = 0; i < (_queue)->end; i++) {                             \
-					(_queue)->data[i + (_queue)->size] = (_queue)->data[i];       \
-				}                                                                 \
-				(_queue)->end += (_queue)->size;                                  \
-			}                                                                     \
-		}                                                                         \
-		(_queue)->data[(_queue)->end] = *(_item);                                 \
-		(_queue)->end = ((_queue)->end + 1) % (_queue)->cap;                      \
-		(_queue)->size++;                                                         \
-	})
+    ({                                                                            \
+        if ((_queue)->size == (_queue)->cap) {                                    \
+            (_queue)->cap *= 2;                                                   \
+            (_queue)->data = HR_REALLOC((_queue)->allocator, (_queue)->data,      \
+                                        sizeof(*(_queue)->data) * (_queue)->cap); \
+            if ((_queue)->start >= (_queue)->end) {                               \
+                size_t i = 0;                                                     \
+                for (i = 0; i < (_queue)->end; i++) {                             \
+                    (_queue)->data[i + (_queue)->size] = (_queue)->data[i];       \
+                }                                                                 \
+                (_queue)->end += (_queue)->size;                                  \
+            }                                                                     \
+        }                                                                         \
+        (_queue)->data[(_queue)->end] = *(_item);                                 \
+        (_queue)->end = ((_queue)->end + 1) % (_queue)->cap;                      \
+        (_queue)->size++;                                                         \
+    })
 
 /**
  * \brief     A macro for getting the item at the front of a queue.

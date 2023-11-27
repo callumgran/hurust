@@ -17,21 +17,21 @@
 /*==========================================================================*
 
   FILE
-	alloc.h
+    alloc.h
 
   PROJECT
-	hurust generic library
+    hurust generic library
 
   DESCRIPTION
-	This file contains the basic layout and macros for the alloc module. This
-	includes macros for using different allocators, and the basic allocator
-	interface.
+    This file contains the basic layout and macros for the alloc module. This
+    includes macros for using different allocators, and the basic allocator
+    interface.
 
   PROGRAMMER
-	Callum Gran.
+    Callum Gran.
 
   MODIFICATIONS
-	20-Nov-23  C.Gran		Created file.
+    20-Nov-23  C.Gran		Created file.
 
  *==========================================================================*/
 
@@ -74,10 +74,10 @@ typedef void(_dealloc_fn_t)(void *arena, void *ptr);
  *              for the allocator functions.
  */
 typedef struct hr_allocator_t {
-	void *arena;
-	_alloc_fn_t *alloc;
-	_realloc_fn_t *realloc;
-	_dealloc_fn_t *dealloc;
+    void *arena;
+    _alloc_fn_t *alloc;
+    _realloc_fn_t *realloc;
+    _dealloc_fn_t *dealloc;
 } HRAllocator;
 
 /**
@@ -90,11 +90,11 @@ typedef struct hr_allocator_t {
  * \param[in]   alloc_fn  The function to use for allocation.
  */
 #define HR_ALLOCATOR_NO_ARENA(name, alloc_fn)           \
-	void *_##name##_allocator(void *arena, size_t size) \
-	{                                                   \
-		(void)arena;                                    \
-		return alloc_fn(size);                          \
-	}
+    void *_##name##_allocator(void *arena, size_t size) \
+    {                                                   \
+        (void)arena;                                    \
+        return alloc_fn(size);                          \
+    }
 
 /**
  * \brief       Macro for defining an reallocator function that
@@ -106,11 +106,11 @@ typedef struct hr_allocator_t {
  * \param[in]   realloc_fn  The function to use for reallocation.
  */
 #define HR_REALLOCATOR_NO_ARENA(name, realloc_fn)                    \
-	void *_##name##_reallocator(void *arena, void *ptr, size_t size) \
-	{                                                                \
-		(void)arena;                                                 \
-		return realloc_fn(ptr, size);                                \
-	}
+    void *_##name##_reallocator(void *arena, void *ptr, size_t size) \
+    {                                                                \
+        (void)arena;                                                 \
+        return realloc_fn(ptr, size);                                \
+    }
 
 /**
  * \brief       Macro for defining an deallocator function that
@@ -122,11 +122,11 @@ typedef struct hr_allocator_t {
  * \param[in]   dealloc_fn  The function to use for deallocation.
  */
 #define HR_DEALLOCATOR_NO_ARENA(name, dealloc_fn)      \
-	void _##name##_deallocator(void *arena, void *ptr) \
-	{                                                  \
-		(void)arena;                                   \
-		dealloc_fn(ptr);                               \
-	}
+    void _##name##_deallocator(void *arena, void *ptr) \
+    {                                                  \
+        (void)arena;                                   \
+        dealloc_fn(ptr);                               \
+    }
 
 /**
  * \brief       Macro for initializing an allocator.
@@ -139,7 +139,7 @@ typedef struct hr_allocator_t {
  * \param[in]   dealloc_fn  The function to use for deallocation.
  */
 #define HR_ALLOCATOR_INIT(name, arena, alloc_fn, realloc_fn, dealloc_fn) \
-	HRAllocator name = { arena, alloc_fn, realloc_fn, dealloc_fn };
+    HRAllocator name = { arena, alloc_fn, realloc_fn, dealloc_fn };
 
 /**
  * \brief       Macro for initializing an allocator that
@@ -153,10 +153,10 @@ typedef struct hr_allocator_t {
  * \param[in]   dealloc_fn  The function to use for deallocation.
  */
 #define HR_ALLOCATOR_NO_ARENA_INIT(name, alloc_fn, realloc_fn, dealloc_fn) \
-	HR_ALLOCATOR_NO_ARENA(name, alloc_fn)                                  \
-	HR_REALLOCATOR_NO_ARENA(name, realloc_fn)                              \
-	HR_DEALLOCATOR_NO_ARENA(name, dealloc_fn)                              \
-	HRAllocator name = { NULL, _##name##_allocator, _##name##_reallocator, _##name##_deallocator };
+    HR_ALLOCATOR_NO_ARENA(name, alloc_fn)                                  \
+    HR_REALLOCATOR_NO_ARENA(name, realloc_fn)                              \
+    HR_DEALLOCATOR_NO_ARENA(name, dealloc_fn)                              \
+    HRAllocator name = { NULL, _##name##_allocator, _##name##_reallocator, _##name##_deallocator };
 
 /**
  * \brief       Macro for setting the current allocator.
@@ -189,7 +189,7 @@ typedef struct hr_allocator_t {
  * \param[in]   size  The size of the memory to reallocate.
  */
 #define HR_CUR_REALLOC(ptr, size) \
-	hr_current_allocator->realloc(hr_current_allocator->arena, ptr, (size))
+    hr_current_allocator->realloc(hr_current_allocator->arena, ptr, (size))
 
 /**
  * \brief       Macro for deallocating memory.

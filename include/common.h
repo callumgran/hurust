@@ -17,19 +17,19 @@
 /*==========================================================================*
 
   FILE
-	common.h
+    common.h
 
   PROJECT
-	hurust generic library
+    hurust generic library
 
   DESCRIPTION
-	This file contains the common data used by the library as a whole.
+    This file contains the common data used by the library as a whole.
 
   PROGRAMMER
-	Callum Gran.
+    Callum Gran.
 
   MODIFICATIONS
-	20-Nov-23  C.Gran		Created file.
+    20-Nov-23  C.Gran		Created file.
 
  *==========================================================================*/
 
@@ -39,19 +39,19 @@
 #include <stddef.h>
 
 #define swap(type, a, b)           \
-	({                             \
-		register type _tmp = *(a); \
-		*(a) = *(b);               \
-		*(b) = _tmp;               \
-	})
+    ({                             \
+        register type _tmp = *(a); \
+        *(a) = *(b);               \
+        *(b) = _tmp;               \
+    })
 
 #define rotate(type, a, b, c)      \
-	({                             \
-		register type _tmp = *(a); \
-		*(a) = *(b);               \
-		*(b) = *(c);               \
-		*(c) = _tmp;               \
-	})
+    ({                             \
+        register type _tmp = *(a); \
+        *(a) = *(b);               \
+        *(b) = *(c);               \
+        *(c) = _tmp;               \
+    })
 
 #define _prim_min(type, a, b) ((a) < (b) ? (a) : (b))
 
@@ -66,14 +66,14 @@
  * \param[in]   structure The structure to ensure capacity for.
  */
 #define _ensure_cap(structure)                                                                    \
-	{                                                                                             \
-		if ((structure)->size == (structure)->cap - 1) {                                          \
-			(structure)->cap <<= 1;                                                               \
-			(structure)->data =                                                                   \
-				(structure)->allocator->realloc((structure)->allocator->arena, (structure)->data, \
-												(structure)->cap * sizeof(*(structure)->data));   \
-		}                                                                                         \
-	}
+    {                                                                                             \
+        if ((structure)->size == (structure)->cap - 1) {                                          \
+            (structure)->cap <<= 1;                                                               \
+            (structure)->data =                                                                   \
+                (structure)->allocator->realloc((structure)->allocator->arena, (structure)->data, \
+                                                (structure)->cap * sizeof(*(structure)->data));   \
+        }                                                                                         \
+    }
 
 /**
  * \brief       A macro ensuring that the given structure doesn't hold too much
@@ -83,13 +83,13 @@
  * \param[in]   structure The structure to reduce capacity for.
  */
 #define _reduce_cap(structure)                                                                    \
-	{                                                                                             \
-		if ((structure)->size < (structure)->cap >> 2) {                                          \
-			(structure)->cap >>= 1;                                                               \
-			(structure)->data =                                                                   \
-				(structure)->allocator->realloc((structure)->allocator->arena, (structure)->data, \
-												(structure)->cap * sizeof(*(structure)->data));   \
-		}                                                                                         \
-	}
+    {                                                                                             \
+        if ((structure)->size < (structure)->cap >> 2) {                                          \
+            (structure)->cap >>= 1;                                                               \
+            (structure)->data =                                                                   \
+                (structure)->allocator->realloc((structure)->allocator->arena, (structure)->data, \
+                                                (structure)->cap * sizeof(*(structure)->data));   \
+        }                                                                                         \
+    }
 
 #endif // HURUST_COMMON_H
