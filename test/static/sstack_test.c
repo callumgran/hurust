@@ -51,7 +51,7 @@ void test_int_push_pop_get(void)
 
     sstack_push(&stack, &item2);
 
-	assert(sstack_full(&stack));
+    assert(sstack_full(&stack));
 
     sstack_pop(&stack, &pop);
 
@@ -101,7 +101,7 @@ void test_str_push_pop_get(void)
 
     sstack_push(&stack, &item3);
 
-	assert(sstack_full(&stack));
+    assert(sstack_full(&stack));
 
     sstack_pop(&stack, &pop);
 

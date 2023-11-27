@@ -163,11 +163,11 @@
  * \param[in] _stack The stack to pop from.
  * \param[in] _ret The variable to store the popped item in.
  */
-#define dstack_pop(_stack, _ret)                                 \
-    ({                                                           \
-		(_stack)->size--;									 	 \
-        *(_ret) = (_stack)->data[(_stack)->size];                \
-		_reduce_cap(_stack);									 \
+#define dstack_pop(_stack, _ret)                  \
+    ({                                            \
+        (_stack)->size--;                         \
+        *(_ret) = (_stack)->data[(_stack)->size]; \
+        _reduce_cap(_stack);                      \
     })
 
 /**
@@ -176,11 +176,11 @@
  * \param[in] _stack The stack to push to.
  * \param[in] _item The item to push.
  */
-#define dstack_push(_stack, _item)                                                \
-    ({                                                                            \
-		_ensure_cap(_stack);													  \
-		(_stack)->data[(_stack)->size] = *(_item);                                 \
-        (_stack)->size++;                                                         \
+#define dstack_push(_stack, _item)                 \
+    ({                                             \
+        _ensure_cap(_stack);                       \
+        (_stack)->data[(_stack)->size] = *(_item); \
+        (_stack)->size++;                          \
     })
 
 /**

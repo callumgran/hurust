@@ -170,10 +170,10 @@
  * \param[in] _stack The stack to pop from.
  * \param[in] _ret The variable to store the popped item in.
  */
-#define sstack_pop(_stack, _ret)                                 \
-    ({                                                           \
-		(_stack)->size--;									 	 \
-        *(_ret) = (_stack)->data[(_stack)->size];                \
+#define sstack_pop(_stack, _ret)                  \
+    ({                                            \
+        (_stack)->size--;                         \
+        *(_ret) = (_stack)->data[(_stack)->size]; \
     })
 
 /**
@@ -182,10 +182,10 @@
  * \param[in] _stack The stack to push to.
  * \param[in] _item The item to push.
  */
-#define sstack_push(_stack, _item)                                                \
-    ({                                                                            \
-		(_stack)->data[(_stack)->size] = *(_item);                                 \
-        (_stack)->size++;                                                         \
+#define sstack_push(_stack, _item)                 \
+    ({                                             \
+        (_stack)->data[(_stack)->size] = *(_item); \
+        (_stack)->size++;                          \
     })
 
 /**
