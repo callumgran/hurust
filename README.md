@@ -8,7 +8,6 @@
 <p align="center">
     <a href="https://github.com/callumgran/hurust/stargazers"><img src="https://img.shields.io/github/stars/callumgran/hurust?style=flat&color=ffa000" alt="Stars"/></a>
     <a href="https://github.com/callumgran/hurust"><img src="https://img.shields.io/tokei/lines/github/callumgran/hurust" alt="loc"/></a>
-    <a href="https://github.com/callumgran/hurust"><img src="https://img.shields.io/tokei/files/github/callumgran/hurust" alt="files"/></a>
 </p>
 
 HURUST is a versatile, easy to use, header based GNU-C collections library.
