@@ -54,7 +54,7 @@ void test_int_push_pop_get(void)
     heap_push(&heap, &item3);
 
     heap_push(&heap, &item4);
-    
+
     pop = heap_pop(&heap);
 
     assert(pop == 1);

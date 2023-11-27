@@ -42,8 +42,8 @@
 #include <stdlib.h>
 
 /**
- * \brief     A macro for defining an vector.
- * \note      This macro defines an vector with the given type and struct prefix.
+ * \brief     A macro for defining a vector.
+ * \note      This macro defines a vector with the given type and struct prefix.
  * \param[in] type The type of the vector.
  * \param[in] struct_prefix The prefix for the vector struct.
  * \note      The struct prefix parameter is used to define the vector struct
@@ -60,8 +60,8 @@
     } struct_prefix##_vector_t;
 
 /**
- * \brief     A macro for initializing an vector.
- * \note      This macro initializes an vector with the given allocator,
+ * \brief     A macro for initializing a vector.
+ * \note      This macro initializes a vector with the given allocator,
  * 		  	  capacity and comparison function for sorting and searching.
  * \param[in] _vector The vector to initialize.
  * \param[in] _allocator The allocator to use for the vector.
@@ -79,8 +79,8 @@
     })
 
 /**
- * \brief     A macro for freeing an vector.
- * \note      This macro frees an vector using the allocator specified when
+ * \brief     A macro for freeing a vector.
+ * \note      This macro frees a vector using the allocator specified when
  * 		  	  initializing the vector.
  * \param[in] _vector The vector to free.
  */
@@ -89,36 +89,36 @@
 // Getters
 
 /**
- * \brief     A macro for getting the size of an vector.
- * \note      This macro gets the size of an vector.
+ * \brief     A macro for getting the size of a vector.
+ * \note      This macro gets the size of a vector.
  * \param[in] _vector The vector to get the size of.
  */
 #define vector_get_size(_vector) ({ (_vector)->size; })
 
 /**
- * \brief     A macro for getting the capacity of an vector.
- * \note      This macro gets the capacity of an vector.
+ * \brief     A macro for getting the capacity of a vector.
+ * \note      This macro gets the capacity of a vector.
  * \param[in] _vector The vector to get the capacity of.
  */
 #define vector_get_cap(_vector) ({ (_vector)->cap; })
 
 /**
- * \brief     A macro for getting the data of an vector.
- * \note      This macro gets the data of an vector.
+ * \brief     A macro for getting the data of a vector.
+ * \note      This macro gets the data of a vector.
  * \param[in] _vector The vector to get the data of.
  */
 #define vector_get_data(_vector) ({ (_vector)->data; })
 
 /**
- * \brief     A macro for getting the comparison function of an vector.
- * \note      This macro gets the comparison function of an vector.
+ * \brief     A macro for getting the comparison function of a vector.
+ * \note      This macro gets the comparison function of a vector.
  * \param[in] _vector The vector to get the comparison function of.
  */
 #define vector_get_cmp(_vector) ({ (_vector)->cmp; })
 
 /**
- * \brief     A macro for getting the allocator of an vector.
- * \note      This macro gets the allocator of an vector.
+ * \brief     A macro for getting the allocator of a vector.
+ * \note      This macro gets the allocator of a vector.
  * \param[in] _vector The vector to get the allocator of.
  */
 #define vector_get_allocator(_vector) ({ (_vector)->cmp; })
@@ -126,40 +126,40 @@
 // Setters
 
 /**
- * \brief     A macro for setting the size of an vector.
- * \note      This macro sets the size of an vector.
+ * \brief     A macro for setting the size of a vector.
+ * \note      This macro sets the size of a vector.
  * \param[in] _vector The vector to set the size of.
  * \param[in] _size The size to set the vector to.
  */
 #define vector_set_size(_vector, _size) ({ (_vector)->size = (_size); })
 
 /**
- * \brief     A macro for setting the capacity of an vector.
- * \note      This macro sets the capacity of an vector.
+ * \brief     A macro for setting the capacity of a vector.
+ * \note      This macro sets the capacity of a vector.
  * \param[in] _vector The vector to set the capacity of.
  * \param[in] _cap The capacity to set the vector to.
  */
 #define vector_set_cap(_vector, _cap) ({ (_vector)->cap = (_cap); })
 
 /**
- * \brief     A macro for setting the data of an vector.
- * \note      This macro sets the data of an vector.
+ * \brief     A macro for setting the data of a vector.
+ * \note      This macro sets the data of a vector.
  * \param[in] _vector The vector to set the data of.
  * \param[in] _data The data to set the vector to.
  */
 #define vector_set_data(_vector, _data) ({ (_vector)->data = (_data); })
 
 /**
- * \brief     A macro for setting the comparison function of an vector.
- * \note      This macro sets the comparison function of an vector.
+ * \brief     A macro for setting the comparison function of a vector.
+ * \note      This macro sets the comparison function of a vector.
  * \param[in] _vector The vector to set the comparison function of.
  * \param[in] _cmp The comparison function to set the vector to.
  */
 #define vector_set_cmp(_vector, _cmp) ({ (_vector)->cmp = (_cmp); })
 
 /**
- * \brief     A macro for setting the allocator of an vector.
- * \note      This macro sets the allocator of an vector.
+ * \brief     A macro for setting the allocator of a vector.
+ * \note      This macro sets the allocator of a vector.
  * \param[in] _vector The vector to set the allocator of.
  * \param[in] _allocator The allocator to set the vector to.
  */
@@ -168,15 +168,15 @@
 // Methods
 
 /**
- * \brief     A macro for checking if an vector is empty.
- * \note      This macro checks if an vector is empty.
+ * \brief     A macro for checking if a vector is empty.
+ * \note      This macro checks if a vector is empty.
  * \param[in] _vector The vector to check.
  */
 #define vector_empty(_vector) ({ (_vector)->size == 0; })
 
 /**
- * \brief     A macro for popping an item from an vector.
- * \note      This macro pops an item from an vector.
+ * \brief     A macro for popping an item from a vector.
+ * \note      This macro pops an item from a vector.
  * \param[in] _vector The vector to pop the item from.
  * \param[in] _i The index of the item to pop.
  */
@@ -192,8 +192,8 @@
     })
 
 /**
- * \brief     A macro for removing an item from an vector.
- * \note      This macro removes an item from an vector.
+ * \brief     A macro for removing an item from a vector.
+ * \note      This macro removes an item from a vector.
  * \param[in] _vector The vector to remove the item from.
  * \param[in] _item The item to remove.
  */
@@ -207,16 +207,16 @@
     })
 
 /**
- * \brief     A macro for getting an item from an vector.
- * \note      This macro gets an item from an vector.
+ * \brief     A macro for getting an item from a vector.
+ * \note      This macro gets an item from a vector.
  * \param[in] _vector The vector to get the item from.
  * \param[in] _i The index of the item to get.
  */
 #define vector_get(_vector, _i) ({ (_vector)->data[(_i)]; })
 
 /**
- * \brief     A macro for setting an item in an vector.
- * \note      This macro sets an item in an vector.
+ * \brief     A macro for setting an item in a vector.
+ * \note      This macro sets an item in a vector.
  * \param[in] _vector The vector to set the item in.
  * \param[in] _item The item to set in the vector.
  * \param[in] _i The index of the item to set.
@@ -224,8 +224,8 @@
 #define vector_set(_vector, _item, _i) ({ (_vector)->data[(_i)] = *(_item); })
 
 /**
- * \brief     A macro for pushing an item to an vector.
- * \note      This macro pushes an item to an vector.
+ * \brief     A macro for pushing an item to a vector.
+ * \note      This macro pushes an item to a vector.
  * \param[in] _vector The vector to push the item to.
  * \param[in] _item The item to push to the vector.
  */
@@ -237,16 +237,16 @@
     })
 
 /**
- * \brief     A macro for sorting an vector.
- * \note      This macro sorts an vector using the comparison function
+ * \brief     A macro for sorting a vector.
+ * \note      This macro sorts a vector using the comparison function
  *            specified when initializing the vector.
  * \param[in] _vector The vector to sort.
  */
 #define vector_sort(_vector) ({ sort((_vector)->data, (_vector)->size, (_vector)->cmp); })
 
 /**
- * \brief     A macro for getting the maximum item in an vector.
- * \note      This macro gets the maximum item in an vector.
+ * \brief     A macro for getting the maximum item in a vector.
+ * \note      This macro gets the maximum item in a vector.
  * \param[in] _vector The vector to get the maximum item from.
  */
 #define vector_max(_vector)                                      \
@@ -260,8 +260,8 @@
     })
 
 /**
- * \brief     A macro for getting the minimum item in an vector.
- * \note      This macro gets the minimum item in an vector.
+ * \brief     A macro for getting the minimum item in a vector.
+ * \note      This macro gets the minimum item in a vector.
  * \param[in] _vector The vector to get the minimum item from.
  */
 #define vector_min(_vector)                                      \
@@ -275,8 +275,8 @@
     })
 
 /**
- * \brief     A macro for performing a for each loop on an vector.
- * \note      This macro performs a for each loop on an vector.
+ * \brief     A macro for performing a for each loop on a vector.
+ * \note      This macro performs a for each loop on a vector.
  * \param[in] _vector The vector to perform the for each loop on.
  * \param[in] _func The function to perform on each item in the vector.
  */
