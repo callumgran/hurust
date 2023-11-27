@@ -17,7 +17,7 @@ HURUST is a versatile, easy to use, header based GNU-C collections library.
 
 - **Dynamic and Static Collections**: HURUST offers both dynamically and statically sized collections.
 
-- **Sorting**: Sort collections easily using built-in sorting functions.
+- **Sorting**: Sort collections easily using built-in sorting macro's.
 
 - **Memory Management**: HURUST collections require a memory management object to be passed in, allowing for easy integration with your project's memory management system.
 
