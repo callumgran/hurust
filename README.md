@@ -2,15 +2,15 @@
 
 [![License](https://img.shields.io/badge/License-GPL--3.0-blue.svg)](LICENSE)
 
-HURUST is a versatile GNU-C collections library designed to simplify the handling of various data types and provide essential functions for sorting and manipulating collections. This library offers a collection of high-utility, reusable macros that enhance your C programming experience.
+HURUST is a versatile, easy to use, header based GNU-C collections library.
 
 ## Features
 
-- **Fully Macro-Based**: HURUST is fully macro-based, meaning that it is easy to integrate into your project and does not require any additional dependencies.
+- **Fully Macro-Based**: HURUST is fully macro-based, meaning that it is simple to use with minimal boilerplate code.
 
-- **Dynamic and Static Collections**: HURUST offers both dynamically and statically sized collections, allowing for flexibility in your project.
+- **Dynamic and Static Collections**: HURUST offers both dynamically and statically sized collections.
 
-- **Sorting**: Sort collections easily using built-in sorting functions, allowing for efficient data manipulation.
+- **Sorting**: Sort collections easily using built-in sorting functions.
 
 - **Memory Management**: HURUST collections require a memory management object to be passed in, allowing for easy integration with your project's memory management system.
 
@@ -62,7 +62,7 @@ For dynamic collections:
 
 ### 3. Usage
 
-HURUST collections are designed to be easy to use. Simply create a collection template, instatiate the object and pass it to the macro's to perform the desired operations.
+HURUST collections are designed to be easy to use. Simply create a collection template, instatiate an object and perform the desired operations.
 
 #### Example
 
@@ -136,7 +136,7 @@ Copy the downloaded hurust.h header file into your project's source code directo
 ```
 
 ### Unit Testing
-Check the provided unit test examples in the test directory, which showcase the use of HURUST as an STB in various scenarios.
+Check the provided unit test examples in the test directory, which showcase the usage of HURUST collections.
 
 ### Contributing
 Contributions are welcome! If you have enhancements or find issues, please open an issue or submit a pull request
