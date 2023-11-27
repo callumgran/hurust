@@ -139,6 +139,12 @@ HRAllocator *hr_current_allocator = &hr_default_allocator;
 
 #define HR_GLOBAL_ALLOCATOR hr_current_allocator
 
+#ifdef HURUST_IMPLEMENTATION
+#       define HURUST_DYNAMIC_IMPLEMENTATION
+#       define HURUST_STATIC_IMPLEMENTATION
+#       define HURUST_FUNCTIONAL_LAMBDA_H
+#endif
+
 #ifdef HURUST_STATIC_IMPLEMENTATION
 #       define HURUST_STATIC_QUEUE_H
 #       define HURUST_STATIC_STACK_H
@@ -150,11 +156,6 @@ HRAllocator *hr_current_allocator = &hr_default_allocator;
 #       define HURUST_DYNAMIC_STACK_H
 #       define HURUST_VECTOR_H
 #       define HURUST_HEAP_H
-#endif
-
-#ifdef HURUST_IMPLEMENTATION
-#       define HURUST_DYNAMIC_IMPLEMENTATION
-#       define HURUST_STATIC_IMPLEMENTATION
 #endif
 
 #if defined(HURUST_ARRAY_H) || defined(HURUST_VECTOR_H)
