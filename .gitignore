@@ -59,6 +59,8 @@ dkms.conf
 .obj/
 
 # Ignore binary files
+
+# Array tests
 array_test
 vector_test
 
@@ -69,3 +71,6 @@ static_queue_test
 # Stack tests
 dynamic_stack_test
 static_stack_test
+
+# Heap tests
+heap_test

@@ -161,13 +161,13 @@
  *            is a stack of integers, the item should be an integer, not a
  *            pointer to an integer.
  * \param[in] _stack The stack to pop from.
- * \param[in] _ret The variable to store the popped item in.
  */
-#define dstack_pop(_stack, _ret)                  \
-    ({                                            \
-        (_stack)->size--;                         \
-        *(_ret) = (_stack)->data[(_stack)->size]; \
-        _reduce_cap(_stack);                      \
+#define dstack_pop(_stack)                                                  \
+    ({                                                                      \
+        (_stack)->size--;                                                   \
+        _typeofarray((_stack)->data) _ret = (_stack)->data[(_stack)->size]; \
+        _reduce_cap((_stack));                                              \
+        _ret;                                                               \
     })
 
 /**
@@ -178,7 +178,7 @@
  */
 #define dstack_push(_stack, _item)                 \
     ({                                             \
-        _ensure_cap(_stack);                       \
+        _ensure_cap((_stack));                     \
         (_stack)->data[(_stack)->size] = *(_item); \
         (_stack)->size++;                          \
     })
@@ -192,8 +192,7 @@
  *            is a stack of integers, the item should be an integer, not a
  *            pointer to an integer.
  * \param[in] _stack The stack to pop from.
- * \param[in] _ret The variable to store the popped item in.
  */
-#define dstack_peek(_stack, _ret) ({ *(_ret) = (_stack)->data[(_stack)->size - 1]; })
+#define dstack_peek(_stack) ({ (_stack)->data[(_stack)->size - 1]; })
 
 #endif // HURUST_DYNAMIC_QUEUE_H

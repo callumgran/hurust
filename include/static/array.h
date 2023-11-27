@@ -187,31 +187,30 @@
  * \note      This macro pops an item from an array.
  * \param[in] _array The array to pop the item from.
  * \param[in] _i The index of the item to pop.
- * \param[in] _ret The item to pop from the array.
  */
-#define array_pop(_array, _i, _ret)                         \
-    ({                                                      \
-        *(_ret) = (_array)->data[(_i)];                     \
-        (_array)->size--;                                   \
-        for (size_t _j = (_i); _j < (_array)->size; _j++) { \
-            (_array)->data[_j] = (_array)->data[_j + 1];    \
-        }                                                   \
+#define array_pop(_array, _i)                                     \
+    ({                                                            \
+        _typeofarray((_array)->data) _ret = (_array)->data[(_i)]; \
+        (_array)->size--;                                         \
+        for (size_t _j = (_i); _j < (_array)->size; _j++) {       \
+            (_array)->data[_j] = (_array)->data[_j + 1];          \
+        }                                                         \
+        _ret;                                                     \
     })
 
 /**
  * \brief     A macro for removing an item from an array.
  * \note      This macro removes an item from an array.
  * \param[in] _array The array to remove the item from.
- * \param[in] _ret The item to remove from the array.
  * \param[in] _item The item to remove.
  */
-#define array_remove(_array, _ret, _item)                        \
+#define array_remove(_array, _item)                              \
     ({                                                           \
         size_t _i = 0;                                           \
         for (; _i < (_array)->size; _i++)                        \
             if ((_array)->cmp((_array)->data[_i], (_item)) == 0) \
                 break;                                           \
-        array_pop(_array, _ret, _i);                             \
+        array_pop(_array, _i);                                   \
     })
 
 /**
@@ -219,9 +218,8 @@
  * \note      This macro gets an item from an array.
  * \param[in] _array The array to get the item from.
  * \param[in] _i The index of the item to get.
- * \param[in] _ret The item to get from the array.
  */
-#define array_get(_array, _i, _ret) ({ *(_ret) = (_array)->data[(_i)]; })
+#define array_get(_array, _i) ({ (_array)->data[(_i)]; })
 
 /**
  * \brief     A macro for setting an item in an array.
@@ -256,30 +254,30 @@
  * \brief     A macro for getting the maximum item in an array.
  * \note      This macro gets the maximum item in an array.
  * \param[in] _array The array to get the maximum item from.
- * \param[in] _ret The maximum item in the array.
  */
-#define array_max(_array, _ret)                                 \
-    ({                                                          \
-        *(_ret) = (_array)->data[0];                            \
-        for (size_t _i = 1; _i < (_array)->size; _i++) {        \
-            if ((_array)->cmp(*(_ret), (_array)->data[_i]) < 0) \
-                *(_ret) = (_array)->data[_i];                   \
-        }                                                       \
+#define array_max(_array)                                      \
+    ({                                                         \
+        _typeofarray((_array)->data) _ret = (_array)->data[0]; \
+        for (size_t _i = 1; _i < (_array)->size; _i++) {       \
+            if ((_array)->cmp(_ret, (_array)->data[_i]) < 0)   \
+                _ret = (_array)->data[_i];                     \
+        }                                                      \
+        _ret;                                                  \
     })
 
 /**
  * \brief     A macro for getting the minimum item in an array.
  * \note      This macro gets the minimum item in an array.
  * \param[in] _array The array to get the minimum item from.
- * \param[in] _ret The minimum item in the array.
  */
-#define array_min(_array, _ret)                                 \
-    ({                                                          \
-        *(_ret) = (_array)->data[0];                            \
-        for (size_t _i = 1; _i < (_array)->size; _i++) {        \
-            if ((_array)->cmp(*(_ret), (_array)->data[_i]) > 0) \
-                *(_ret) = (_array)->data[_i];                   \
-        }                                                       \
+#define array_min(_array)                                      \
+    ({                                                         \
+        _typeofarray((_array)->data) _ret = (_array)->data[0]; \
+        for (size_t _i = 1; _i < (_array)->size; _i++) {       \
+            if ((_array)->cmp(_ret, (_array)->data[_i]) > 0)   \
+                _ret = (_array)->data[_i];                     \
+        }                                                      \
+        _ret;                                                  \
     })
 
 /**

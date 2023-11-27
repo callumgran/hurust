@@ -168,12 +168,11 @@
  *            is a stack of integers, the item should be an integer, not a
  *            pointer to an integer.
  * \param[in] _stack The stack to pop from.
- * \param[in] _ret The variable to store the popped item in.
  */
-#define sstack_pop(_stack, _ret)                  \
-    ({                                            \
-        (_stack)->size--;                         \
-        *(_ret) = (_stack)->data[(_stack)->size]; \
+#define sstack_pop(_stack)              \
+    ({                                  \
+        (_stack)->size--;               \
+        (_stack)->data[(_stack)->size]; \
     })
 
 /**
@@ -197,8 +196,7 @@
  *            is a stack of integers, the item should be an integer, not a
  *            pointer to an integer.
  * \param[in] _stack The stack to pop from.
- * \param[in] _ret The variable to store the popped item in.
  */
-#define sstack_peek(_stack, _ret) ({ *(_ret) = (_stack)->data[(_stack)->size - 1]; })
+#define sstack_peek(_stack) ({ (_stack)->data[(_stack)->size - 1]; })
 
 #endif // HURUST_DYNAMIC_QUEUE_H

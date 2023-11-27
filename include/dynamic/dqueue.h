@@ -196,13 +196,13 @@
  *            is a queue of integers, the item should be an integer, not a
  *            pointer to an integer.
  * \param[in] _queue The queue to pop from.
- * \param[in] _ret The variable to store the popped item in.
  */
-#define dqueue_pop(_queue, _ret)                                 \
-    ({                                                           \
-        *(_ret) = (_queue)->data[(_queue)->start];               \
-        (_queue)->start = ((_queue)->start + 1) % (_queue)->cap; \
-        (_queue)->size--;                                        \
+#define dqueue_pop(_queue)                                                   \
+    ({                                                                       \
+        _typeofarray((_queue)->data) _ret = (_queue)->data[(_queue)->start]; \
+        (_queue)->start = ((_queue)->start + 1) % (_queue)->cap;             \
+        (_queue)->size--;                                                    \
+        _ret;                                                                \
     })
 
 /**
@@ -239,8 +239,7 @@
  *            is a queue of integers, the item should be an integer, not a
  *            pointer to an integer.
  * \param[in] _queue The queue to pop from.
- * \param[in] _ret The variable to store the popped item in.
  */
-#define dqueue_peek(_queue, _ret) ({ *(_ret) = (_queue)->data[(_queue)->start]; })
+#define dqueue_peek(_queue) ({ (_queue)->data[(_queue)->start]; })
 
 #endif // HURUST_DYNAMIC_QUEUE_H

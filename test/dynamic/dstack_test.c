@@ -33,15 +33,11 @@ void test_int_push_pop_get(void)
 
     dstack_push(&stack, &item);
 
-    int get;
-
-    dstack_peek(&stack, &get);
+    int get = dstack_peek(&stack);
 
     assert(get == 1);
 
-    int pop;
-
-    dstack_pop(&stack, &pop);
+    int pop = dstack_pop(&stack);
 
     assert(pop == 1);
 
@@ -51,11 +47,11 @@ void test_int_push_pop_get(void)
 
     dstack_push(&stack, &item2);
 
-    dstack_pop(&stack, &pop);
+    pop = dstack_pop(&stack);
 
     assert(pop == 2);
 
-    dstack_pop(&stack, &pop);
+    pop = dstack_pop(&stack);
 
     assert(pop == 1);
 
@@ -79,15 +75,11 @@ void test_str_push_pop_get(void)
 
     dstack_push(&stack, &item);
 
-    char *get;
-
-    dstack_peek(&stack, &get);
+    char *get = dstack_peek(&stack);
 
     assert(strcmp(get, "Hello") == 0);
 
-    char *pop;
-
-    dstack_pop(&stack, &pop);
+    char *pop = dstack_pop(&stack);
 
     assert(strcmp(pop, "Hello") == 0);
 
@@ -99,15 +91,15 @@ void test_str_push_pop_get(void)
 
     dstack_push(&stack, &item3);
 
-    dstack_pop(&stack, &pop);
+    pop = dstack_pop(&stack);
 
     assert(strcmp(pop, "Hello World") == 0);
 
-    dstack_pop(&stack, &pop);
+    pop = dstack_pop(&stack);
 
     assert(strcmp(pop, "World") == 0);
 
-    dstack_pop(&stack, &pop);
+    pop = dstack_pop(&stack);
 
     assert(strcmp(pop, "Hello") == 0);
 

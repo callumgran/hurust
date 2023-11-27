@@ -37,15 +37,11 @@ void test_int_push_pop_get(void)
 
     array_push(&array, &item);
 
-    int get;
-
-    array_get(&array, 0, &get);
+    int get = array_get(&array, 0);
 
     assert(get == 1);
 
-    int pop;
-
-    array_pop(&array, 0, &pop);
+    int pop = array_pop(&array, 0);
 
     assert(pop == 1);
 
@@ -55,13 +51,21 @@ void test_int_push_pop_get(void)
 
     array_push(&array, &item2);
 
+    int min = array_min(&array);
+
+    assert(min == 1);
+
+    int max = array_max(&array);
+
+    assert(max == 2);
+
     assert(array_full(&array));
 
-    array_pop(&array, 1, &pop);
+    pop = array_pop(&array, 1);
 
     assert(pop == 2);
 
-    array_pop(&array, 0, &pop);
+    pop = array_pop(&array, 0);
 
     assert(pop == 1);
 
@@ -85,15 +89,11 @@ void test_str_push_pop_get(void)
 
     array_push(&array, &item);
 
-    char *get;
-
-    array_get(&array, 0, &get);
+    char *get = array_get(&array, 0);
 
     assert(strcmp(get, "Hello") == 0);
 
-    char *pop;
-
-    array_pop(&array, 0, &pop);
+    char *pop = array_pop(&array, 0);
 
     assert(strcmp(pop, "Hello") == 0);
 
@@ -105,17 +105,25 @@ void test_str_push_pop_get(void)
 
     array_push(&array, &item3);
 
+    char *min = array_min(&array);
+
+    assert(strcmp(min, "Hello") == 0);
+
+    char *max = array_max(&array);
+
+    assert(strcmp(max, "World") == 0);
+
     assert(array_full(&array));
 
-    array_pop(&array, 1, &pop);
+    pop = array_pop(&array, 1);
 
     assert(strcmp(pop, "World") == 0);
 
-    array_pop(&array, 1, &pop);
+    pop = array_pop(&array, 1);
 
     assert(strcmp(pop, "Hello World") == 0);
 
-    array_pop(&array, 0, &pop);
+    pop = array_pop(&array, 0);
 
     assert(strcmp(pop, "Hello") == 0);
 

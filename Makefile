@@ -7,7 +7,7 @@ DIRS := $(shell find $(SRC) -type d)
 SRCS := $(shell find $(SRC) -type f -name "*.c")
 OBJS := $(SRCS:%.c=$(OBJDIR)/%.o)
 
-CFLAGS = -Iinclude -Wall -Wextra -Wshadow -std=gnu11 -O3
+CFLAGS = -Iinclude -Wall -Wextra -Wshadow -std=gnu2x -g
 CFLAGS += -DLOGGING
 LDFLAGS = -pthread
 LDLIBS = -lm
@@ -25,6 +25,9 @@ TARGET_VECTOR_TEST = vector_test
 # Stack
 TARGET_DSTACK_TEST = dynamic_stack_test
 TARGET_SSTACK_TEST = static_stack_test
+
+# Heap
+TARGET_HEAP_TEST = heap_test
 
 all: $(TARGET)
 
@@ -60,8 +63,12 @@ dstack_test:
 sstack_test:
 	$(CC) ./test/static/sstack_test.c $(CFLAGS) -o $(TARGET_SSTACK_TEST)
 
+# Heap
+heap_test:
+	$(CC) ./test/dynamic/heap_test.c $(CFLAGS) -o $(TARGET_HEAP_TEST)
+
 clean:
-	rm -rf $(OBJDIR) $(TARGET) $(TARGET_SQUEUE_TEST) $(TARGET_DQUEUE_TEST) $(TARGET_ARRAY_TEST) $(TARGET_VECTOR_TEST)
+	rm -rf $(OBJDIR) $(TARGET) $(TARGET_SQUEUE_TEST) $(TARGET_DQUEUE_TEST) $(TARGET_ARRAY_TEST) $(TARGET_VECTOR_TEST) $(TARGET_DSTACK_TEST) $(TARGET_SSTACK_TEST) $(TARGET_HEAP_TEST)
 
 tags:
 	@ctags -R
