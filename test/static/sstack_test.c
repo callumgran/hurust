@@ -116,7 +116,7 @@ void test_str_push_pop_get(void)
 
 int main(void)
 {
-    printf("Running dynamic stack tests...\n");
+    printf("Running static stack tests...\n");
     test_int_push_pop_get();
     test_str_push_pop_get();
     return 0;

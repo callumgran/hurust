@@ -23,7 +23,7 @@
     hurust generic library
 
   DESCRIPTION
-    This file contains the heap implementation, which is a priority queue.
+    This file contains the binary heap implementation.
 
   PROGRAMMER
     Callum Gran.
@@ -58,26 +58,26 @@
         struct hr_allocator_t *allocator;   \
     } struct_prefix##_heap_t;
 
-#define heap_init(_heap, _allocator, _cap, _cmp)                                       \
-    ({                                                                                 \
-        (_vector)->allocator = (_allocator);                                           \
-        (_vector)->cap = (_cap);                                                       \
-        (_vector)->size = 0;                                                           \
-        (_vector)->cmp = (_cmp);                                                       \
-        (_vector)->data =                                                              \
-            HR_ALLOC((_vector)->allocator, sizeof(*(_vector)->data) * (_vector)->cap); \
+#define heap_init(_heap, _allocator, _cap, _cmp)                                             \
+    ({                                                                                       \
+        (_heap)->allocator = (_allocator);                                                   \
+        (_heap)->cap = (_cap);                                                               \
+        (_heap)->size = 0;                                                                   \
+        (_heap)->cmp = (_cmp);                                                               \
+        (_heap)->data = HR_ALLOC((_heap)->allocator, sizeof(*(_heap)->data) * (_heap)->cap); \
     })
 
-#define heap_free(_heap) ({ HR_DEALLOC((_vector)->allocator, (_vector)->data); })
+#define heap_free(_heap) ({ HR_DEALLOC((_heap)->allocator, (_heap)->data); })
 
 #define _heap_left_child_idx(_parent_idx) (((_parent_idx) << 1) + 1)
 #define _heap_right_child_idx(_parent_idx) (((_parent_idx) + 1) << 1)
 #define _heap_parent_idx(_child_idx) (((_child_idx)-1) >> 1)
 
-#define _heap_has_left_child(_heap, _parent_idx) (_heap_left_child_idx(_parent_idx) < (_heap)->size)
+#define _heap_has_left_child(_heap, _parent_idx) \
+    (_heap_left_child_idx(_parent_idx) < (__ssize_t)(_heap)->size)
 
 #define _heap_has_right_child(_heap, _parent_idx) \
-    (_heap_right_child_idx(_parent_idx) < (_heap)->size)
+    (_heap_right_child_idx(_parent_idx) < (__ssize_t)(_heap)->size)
 
 #define heap_left_child(_heap, _parent_idx) ((_heap)->data[_heap_left_child_idx(_parent_idx)])
 
@@ -85,36 +85,56 @@
 
 #define heap_parent(_heap, _child_idx) ((_heap)->data[_heap_parent_idx(_child_idx)])
 
-#define _heapify_up(_heap)                                                                  \
-    ({                                                                                      \
-        size_t _idx = (_heap)->size - 1;                                                    \
-        size_t _parent_idx = _heap_parent_idx(_idx);                                        \
-        while (_parent_idx > 0 &&                                                           \
-               _heap->cmp(heap_parent(_heap, _idx), heap_parent(_heap, _parent_idx)) < 0) { \
-            swap(heap_parent(_heap, _idx), heap_parent(_heap, _parent_idx));                \
-            _idx = _parent_idx;                                                             \
-            _parent_idx = _heap_parent_idx(_idx);                                           \
-        }                                                                                   \
+#define _heapify_up(_heap)                                                            \
+    ({                                                                                \
+        __ssize_t _idx = (_heap)->size - 1;                                           \
+        __ssize_t _parent_idx = _heap_parent_idx(_idx);                               \
+        while (_parent_idx >= 0 &&                                                    \
+               (_heap)->cmp(((_heap)->data[_idx]), (_heap)->data[_parent_idx]) < 0) { \
+            swap(_typeofarray((_heap)->data), ((_heap)->data + _parent_idx),          \
+                 ((_heap)->data + _idx));                                             \
+            _idx = _parent_idx;                                                       \
+            _parent_idx = _heap_parent_idx(_idx);                                     \
+        }                                                                             \
     })
 
-
-#define _heapify_down(_heap)                                                                   \
-    ({                                                                                         \
-        size_t _idx = 0;                                                                       \
-        int _min_idx;                                                                          \
-        while (_heap_has_left_child(_heap, _idx)) {                                            \
-            _min_idx = _heap_left_child_idx(_idx);                                             \
-            if (_heap_has_right_child(_heap, _idx) &&                                          \
-                _heap->cmp(heap_right_child(_heap, _idx), heap_left_child(_heap, _idx)) < 0) { \
-                _min_idx = _heap_right_child_idx(_idx);                                        \
-            }                                                                                  \
-            if (_heap->cmp(heap_parent(_heap, _min_idx), heap_parent(_heap, _idx)) < 0) {      \
-                break;                                                                         \
-            } else {                                                                           \
-                swap(heap_parent(_heap, _idx), heap_parent(_heap, _min_idx));                  \
-                _idx = _min_idx;                                                               \
-            }                                                                                  \
-        }                                                                                      \
+#define _heapify_down(_heap)                                                                       \
+    ({                                                                                             \
+        __ssize_t _idx = 0;                                                                        \
+        __ssize_t _min_idx;                                                                        \
+        while (_heap_has_left_child(_heap, _idx)) {                                                \
+            _min_idx = _heap_left_child_idx(_idx);                                                 \
+            if (_heap_has_right_child(_heap, _idx) &&                                              \
+                (_heap)->cmp(heap_right_child(_heap, _idx), heap_left_child(_heap, _idx)) < 0) {   \
+                _min_idx = _heap_right_child_idx(_idx);                                            \
+            }                                                                                      \
+            if ((_heap)->cmp(((_heap)->data[_min_idx]), (_heap)->data[_idx]) > 0) {                \
+                break;                                                                             \
+            } else {                                                                               \
+                swap(_typeofarray((_heap)->data), (_heap)->data + _idx, (_heap)->data + _min_idx); \
+                _idx = _min_idx;                                                                   \
+            }                                                                                      \
+        }                                                                                          \
     })
+
+#define heap_empty(_heap) ({ (_heap)->size == 0; })
+
+#define heap_push(_heap, _item)                    \
+    ({                                             \
+        _ensure_cap(_heap);                        \
+        (_heap)->data[(_heap)->size++] = *(_item); \
+        _heapify_up(_heap);                        \
+    })
+
+#define heap_pop(_heap)                                      \
+    ({                                                       \
+        _typeofarray((_heap)->data) _ret = (_heap)->data[0]; \
+        (_heap)->data[0] = (_heap)->data[--(_heap)->size];   \
+        _heapify_down(_heap);                                \
+        _reduce_cap(_heap);                                  \
+        _ret;                                                \
+    })
+
+#define heap_peek(_heap) ({ (_heap)->data[0]; })
 
 #endif // HURUST_HEAP_H

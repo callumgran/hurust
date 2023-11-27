@@ -23,6 +23,7 @@ HURUST is a versatile GNU-C collections library designed to simplify the handlin
 | Vector       | List                               | Dynamic Array                   |
 | Queue        | FIFO                               | Dynamic Circular Array          |
 | Stack        | LIFO                               | Dynamic Array                   |
+| Binary Heap  | Priority Queue                     | Dynamic Array                   |
 
 ### Static Collections
 
@@ -31,6 +32,7 @@ HURUST is a versatile GNU-C collections library designed to simplify the handlin
 | Array         | Array                              | Static Array                    |
 | Queue         | FIFO                               | Static Circular Array           |
 | Stack         | LIFO                               | Static Array                    |
+| Binary Heap   | Priority Queue                     | Static Array                    |
 
 ## Extra Features
 
