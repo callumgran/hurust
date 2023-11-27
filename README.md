@@ -1,7 +1,5 @@
 # HURUST C Macro Collections Library
 
-[![License](https://img.shields.io/badge/License-GPL--3.0-blue.svg)](LICENSE)
-
 <p align="center">
     <a href="https://github.com/callumgran/hurust/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-GPL--3.0-blue.svg" alt="License"/></a>
     <a href="https://github.com/callumgran/hurust"><img src="https://img.shields.io/badge/GitHub-hurust-2195F3.svg?logo=github" alt="LinkToRepo"/></a>
@@ -9,8 +7,8 @@
 
 <p align="center">
     <a href="https://github.com/callumgran/hurust/stargazers"><img src="https://img.shields.io/github/stars/callumgran/hurust?style=flat&color=ffa000" alt="Stars"/></a>
-    <a href="https://github.com/XAMPPRocky/tokei"><img src="https://img.shields.io/badge/Lines%20of%20Code-28513-007596.svg" alt="loc"/></a>
-    <a href="https://github.com/XAMPPRocky/tokei"><img src="https://img.shields.io/badge/Files-130-961c00.svg" alt="loc"/></a>
+    <a href="https://github.com/callumgran/hurust"><img src="https://img.shields.io/tokei/lines/github/callumgran/hurust" alt="loc"/></a>
+    <a href="https://github.com/callumgran/hurust"><img src="https://img.shields.io/tokei/files/github/callumgran/hurust" alt="loc"/></a>
 </p>
 
 HURUST is a versatile, easy to use, header based GNU-C collections library.
