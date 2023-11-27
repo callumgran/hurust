@@ -33,15 +33,11 @@ void test_int_push_pop_get(void)
 
     dqueue_push(&queue, &item);
 
-    int get;
-
-    dqueue_peek(&queue, &get);
+    int get = dqueue_peek(&queue);
 
     assert(get == 1);
 
-    int pop;
-
-    dqueue_pop(&queue, &pop);
+    int pop = dqueue_pop(&queue);
 
     assert(pop == 1);
 
@@ -51,11 +47,11 @@ void test_int_push_pop_get(void)
 
     dqueue_push(&queue, &item2);
 
-    dqueue_pop(&queue, &pop);
+    pop = dqueue_pop(&queue);
 
     assert(pop == 1);
 
-    dqueue_pop(&queue, &pop);
+    pop = dqueue_pop(&queue);
 
     assert(pop == 2);
 
@@ -79,15 +75,11 @@ void test_str_push_pop_get(void)
 
     dqueue_push(&queue, &item);
 
-    char *get;
-
-    dqueue_peek(&queue, &get);
+    char *get = dqueue_peek(&queue);
 
     assert(strcmp(get, "Hello") == 0);
 
-    char *pop;
-
-    dqueue_pop(&queue, &pop);
+    char *pop = dqueue_pop(&queue);
 
     assert(strcmp(pop, "Hello") == 0);
 
@@ -99,15 +91,15 @@ void test_str_push_pop_get(void)
 
     dqueue_push(&queue, &item3);
 
-    dqueue_pop(&queue, &pop);
+    pop = dqueue_pop(&queue);
 
     assert(strcmp(pop, "Hello") == 0);
 
-    dqueue_pop(&queue, &pop);
+    pop = dqueue_pop(&queue);
 
     assert(strcmp(pop, "World") == 0);
 
-    dqueue_pop(&queue, &pop);
+    pop = dqueue_pop(&queue);
 
     assert(strcmp(pop, "Hello World") == 0);
 
