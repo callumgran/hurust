@@ -45,7 +45,7 @@ HURUST is a versatile GNU-C collections library designed to simplify the handlin
 
 ### 1. Download
 
-Download the latest release of HURUST from the [Releases](https://github.com/callumg/hurust/releases) page.
+Download the latest release of HURUST from the [Releases](https://github.com/callumgran/hurust/releases) page.
 
 ### 2. Integration
 
@@ -53,11 +53,11 @@ Include the appropriate collection header file in your project:
 
 For static collections:
 ```c
-#include <hurust/static/collection.h>
+#include "hurust/static/<collection_name>.h"
 ```
 For dynamic collections:
 ```c
-#include <hurust/dynamic/collection.h>
+#include "hurust/dynamic/<collection_name>.h"
 ```
 
 ### 3. Usage
@@ -71,8 +71,8 @@ HURUST collections are designed to be easy to use. Simply create a collection ob
 #include <stdbool.h>
 #include <stdio.h>
 #include <assert.h>
-#include <hurust/functional/lambda.h>
-#include <hurust/dynamic/vector.h>
+#include "hurust/functional/lambda.h"
+#include "hurust/dynamic/vector.h"
 
 int main(void) 
 {
@@ -124,7 +124,7 @@ HURUST can be easily integrated into your project as a single-header library (ST
 
 ### Downloading the STB
 
-Download the latest single-header release of HURUST from the [Releases](https://github.com/callumg/hurust/releases) page. The single-header file is typically named hurust.h.
+Download the latest single-header release of HURUST from the [Releases](https://github.com/callumgran/hurust/releases) page. The single-header file is typically named hurust.h.
 
 ### Integration
 
