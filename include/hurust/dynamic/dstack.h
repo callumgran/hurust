@@ -32,8 +32,8 @@
     27-Nov-23  C.Gran		Created file.
 
  *==========================================================================*/
-#ifndef HURUST_DYNAMIC_QUEUE_H
-#define HURUST_DYNAMIC_QUEUE_H
+#ifndef HURUST_DYNAMIC_STACK_H
+#define HURUST_DYNAMIC_STACK_H
 
 #include "../alloc.h"
 #include "../common.h"

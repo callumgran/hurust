@@ -32,6 +32,8 @@
     25-Nov-23  C.Gran		Created file.
 
  *==========================================================================*/
+#ifndef HURUST_FUNCTIONAL_LAMBDA_H
+#define HURUST_FUNCTIONAL_LAMBDA_H
 
 /**
  * \brief     A macro for defining a lambda function.
@@ -55,3 +57,5 @@
  */
 #define anon(return_type, func_args, func_body, ...) \
     lambda(return_type, func_args, func_body)(__VA_ARGS__)
+
+#endif // HURUST_FUNCTIONAL_LAMBDA_H
