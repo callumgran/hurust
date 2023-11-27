@@ -45,7 +45,7 @@ HURUST is a versatile GNU-C collections library designed to simplify the handlin
 
 ### 1. Download
 
-Download the latest release of HURUST from the [Releases](https://github.com/callumgran/hurust/releases) page.
+Download the latest release of HURUST from the [Releases](https://github.com/callumgran/hurust/releases) page and include the hurust directory in your project.
 
 ### 2. Integration
 
@@ -53,16 +53,16 @@ Include the appropriate collection header file in your project:
 
 For static collections:
 ```c
-#include "hurust/static/<collection_name>.h"
+#include "hurust/static/collection_name.h"
 ```
 For dynamic collections:
 ```c
-#include "hurust/dynamic/<collection_name>.h"
+#include "hurust/dynamic/collection_name.h"
 ```
 
 ### 3. Usage
 
-HURUST collections are designed to be easy to use. Simply create a collection object and pass it to the appropriate collection macro to perform the desired operation.
+HURUST collections are designed to be easy to use. Simply create a collection template, instatiate the object and pass it to the macro's to perform the desired operations.
 
 #### Example
 
