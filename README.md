@@ -106,8 +106,7 @@ int main(void)
         vector_get_data(&vector), vector_get_size(&vector)));
 
     // Pop an element off the vector
-    int pop;
-    vector_pop(&vector, 2, &pop);
+    int pop = vector_pop(&vector, 2);
 
     // Print the vector
     vector_foreach(&vector, lambda(void, (const int *const element), { 

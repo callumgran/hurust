@@ -37,15 +37,11 @@ void test_int_push_pop_get(void)
 
     vector_push(&vector, &item);
 
-    int get;
-
-    vector_get(&vector, 0, &get);
+    int get = vector_get(&vector, 0);
 
     assert(get == 1);
 
-    int pop;
-
-    vector_pop(&vector, 0, &pop);
+    int pop = vector_pop(&vector, 0);
 
     assert(pop == 1);
 
@@ -55,11 +51,11 @@ void test_int_push_pop_get(void)
 
     vector_push(&vector, &item2);
 
-    vector_pop(&vector, 1, &pop);
+    pop = vector_pop(&vector, 1);
 
     assert(pop == 2);
 
-    vector_pop(&vector, 0, &pop);
+    pop = vector_pop(&vector, 0);
 
     assert(pop == 1);
 
@@ -85,15 +81,11 @@ void test_str_push_pop_get(void)
 
     vector_push(&vector, &item);
 
-    char *get;
-
-    vector_get(&vector, 0, &get);
+    char *get = vector_get(&vector, 0);
 
     assert(strcmp(get, "Hello") == 0);
 
-    char *pop;
-
-    vector_pop(&vector, 0, &pop);
+    char *pop = vector_pop(&vector, 0);
 
     assert(strcmp(pop, "Hello") == 0);
 
@@ -105,15 +97,15 @@ void test_str_push_pop_get(void)
 
     vector_push(&vector, &item3);
 
-    vector_pop(&vector, 1, &pop);
+    pop = vector_pop(&vector, 1);
 
     assert(strcmp(pop, "World") == 0);
 
-    vector_pop(&vector, 1, &pop);
+    pop = vector_pop(&vector, 1);
 
     assert(strcmp(pop, "Hello World") == 0);
 
-    vector_pop(&vector, 0, &pop);
+    pop = vector_pop(&vector, 0);
 
     assert(strcmp(pop, "Hello") == 0);
 

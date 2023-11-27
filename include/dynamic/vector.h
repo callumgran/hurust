@@ -32,8 +32,8 @@
     25-Nov-23  C.Gran		Created file.
 
  *==========================================================================*/
-#ifndef HURUST_vector_H
-#define HURUST_vector_H
+#ifndef HURUST_VECTOR_H
+#define HURUST_VECTOR_H
 
 #include "../alloc.h"
 #include "../common.h"
@@ -179,32 +179,31 @@
  * \note      This macro pops an item from an vector.
  * \param[in] _vector The vector to pop the item from.
  * \param[in] _i The index of the item to pop.
- * \param[in] _ret The item to pop from the vector.
  */
-#define vector_pop(_vector, _i, _ret)                        \
-    ({                                                       \
-        *(_ret) = (_vector)->data[(_i)];                     \
-        (_vector)->size--;                                   \
-        for (size_t _j = (_i); _j < (_vector)->size; _j++) { \
-            (_vector)->data[_j] = (_vector)->data[_j + 1];   \
-        }                                                    \
-        _reduce_cap(_vector);                                \
+#define vector_pop(_vector, _i)                                     \
+    ({                                                              \
+        _typeofarray((_vector)->data) _ret = (_vector)->data[(_i)]; \
+        (_vector)->size--;                                          \
+        for (size_t _j = (_i); _j < (_vector)->size; _j++) {        \
+            (_vector)->data[_j] = (_vector)->data[_j + 1];          \
+        }                                                           \
+        _reduce_cap(_vector);                                       \
+        _ret;                                                       \
     })
 
 /**
  * \brief     A macro for removing an item from an vector.
  * \note      This macro removes an item from an vector.
  * \param[in] _vector The vector to remove the item from.
- * \param[in] _ret The item to remove from the vector.
  * \param[in] _item The item to remove.
  */
-#define vector_remove(_vector, _ret, _item)                        \
+#define vector_remove(_vector, _item)                              \
     ({                                                             \
         size_t _i = 0;                                             \
         for (; _i < (_vector)->size; _i++)                         \
             if ((_vector)->cmp((_vector)->data[_i], (_item)) == 0) \
                 break;                                             \
-        vector_pop(_vector, _ret, _i);                             \
+        vector_pop(_vector, _i);                                   \
     })
 
 /**
@@ -212,9 +211,8 @@
  * \note      This macro gets an item from an vector.
  * \param[in] _vector The vector to get the item from.
  * \param[in] _i The index of the item to get.
- * \param[in] _ret The item to get from the vector.
  */
-#define vector_get(_vector, _i, _ret) ({ *(_ret) = (_vector)->data[(_i)]; })
+#define vector_get(_vector, _i) ({ (_vector)->data[(_i)]; })
 
 /**
  * \brief     A macro for setting an item in an vector.
@@ -250,30 +248,30 @@
  * \brief     A macro for getting the maximum item in an vector.
  * \note      This macro gets the maximum item in an vector.
  * \param[in] _vector The vector to get the maximum item from.
- * \param[in] _ret The maximum item in the vector.
  */
-#define vector_max(_vector, _ret)                                 \
-    ({                                                            \
-        *(_ret) = (_vector)->data[0];                             \
-        for (size_t _i = 1; _i < (_vector)->size; _i++) {         \
-            if ((_vector)->cmp(*(_ret), (_vector)->data[_i]) < 0) \
-                *(_ret) = (_vector)->data[_i];                    \
-        }                                                         \
+#define vector_max(_vector)                                      \
+    ({                                                           \
+        _typeofarray((_vector)->data) _ret = (_vector)->data[0]; \
+        for (size_t _i = 1; _i < (_vector)->size; _i++) {        \
+            if ((_vector)->cmp(_ret, (_vector)->data[_i]) < 0)   \
+                _ret = (_vector)->data[_i];                      \
+        }                                                        \
+        _ret;                                                    \
     })
 
 /**
  * \brief     A macro for getting the minimum item in an vector.
  * \note      This macro gets the minimum item in an vector.
  * \param[in] _vector The vector to get the minimum item from.
- * \param[in] _ret The minimum item in the vector.
  */
-#define vector_min(_vector, _ret)                                 \
-    ({                                                            \
-        *(_ret) = (_vector)->data[0];                             \
-        for (size_t _i = 1; _i < (_vector)->size; _i++) {         \
-            if ((_vector)->cmp(*(_ret), (_vector)->data[_i]) > 0) \
-                *(_ret) = (_vector)->data[_i];                    \
-        }                                                         \
+#define vector_min(_vector)                                      \
+    ({                                                           \
+        _typeofarray((_vector)->data) _ret = (_vector)->data[0]; \
+        for (size_t _i = 1; _i < (_vector)->size; _i++) {        \
+            if ((_vector)->cmp(_ret, (_vector)->data[_i]) > 0)   \
+                _ret = (_vector)->data[_i];                      \
+        }                                                        \
+        _ret;                                                    \
     })
 
 /**
@@ -289,4 +287,4 @@
         }                                                 \
     })
 
-#endif // HURUST_vector_H
+#endif // HURUST_VECTOR_H
