@@ -65,3 +65,7 @@ vector_test
 # Queue tests
 dynamic_queue_test
 static_queue_test
+
+# Stack tests
+dynamic_stack_test
+static_stack_test

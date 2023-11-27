@@ -22,6 +22,10 @@ TARGET_DQUEUE_TEST = dynamic_queue_test
 TARGET_ARRAY_TEST = array_test
 TARGET_VECTOR_TEST = vector_test
 
+# Stack
+TARGET_DSTACK_TEST = dynamic_stack_test
+TARGET_SSTACK_TEST = static_stack_test
+
 all: $(TARGET)
 
 $(OBJDIR)/%.o: %.c Makefile | $(OBJDIR)
@@ -48,6 +52,13 @@ array_test:
 
 vector_test:
 	$(CC) ./test/dynamic/vector_test.c $(CFLAGS) -o $(TARGET_VECTOR_TEST)
+
+# Stack
+dstack_test:
+	$(CC) ./test/dynamic/dstack_test.c $(CFLAGS) -o $(TARGET_DSTACK_TEST)
+
+sstack_test:
+	$(CC) ./test/static/sstack_test.c $(CFLAGS) -o $(TARGET_SSTACK_TEST)
 
 clean:
 	rm -rf $(OBJDIR) $(TARGET) $(TARGET_SQUEUE_TEST) $(TARGET_DQUEUE_TEST) $(TARGET_ARRAY_TEST) $(TARGET_VECTOR_TEST)
