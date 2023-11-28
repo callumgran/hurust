@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "../../include/static/squeue.h"
+#include "../../include/hurust/static/squeue.h"
 
 void test_int_push_pop_get(void)
 {

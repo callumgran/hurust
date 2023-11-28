@@ -28,6 +28,9 @@ TARGET_SSTACK_TEST = static_stack_test
 # Heap
 TARGET_HEAP_TEST = heap_test
 
+# Hash data structures
+TARGET_STATIC_HASH_TEST = static_hashset_test
+
 all: $(TARGET)
 
 $(OBJDIR)/%.o: %.c Makefile | $(OBJDIR)
@@ -66,8 +69,12 @@ sstack_test:
 heap_test:
 	$(CC) ./test/dynamic/heap_test.c $(CFLAGS) -o $(TARGET_HEAP_TEST)
 
+# Hash data structures
+shashset_test:
+	$(CC) ./test/static/hashset_test.c $(CFLAGS) -o $(TARGET_STATIC_HASH_TEST)
+
 clean:
-	rm -rf $(OBJDIR) $(TARGET) $(TARGET_SQUEUE_TEST) $(TARGET_DQUEUE_TEST) $(TARGET_ARRAY_TEST) $(TARGET_VECTOR_TEST) $(TARGET_DSTACK_TEST) $(TARGET_SSTACK_TEST) $(TARGET_HEAP_TEST)
+	rm -rf $(OBJDIR) $(TARGET) $(TARGET_SQUEUE_TEST) $(TARGET_DQUEUE_TEST) $(TARGET_ARRAY_TEST) $(TARGET_VECTOR_TEST) $(TARGET_DSTACK_TEST) $(TARGET_SSTACK_TEST) $(TARGET_HEAP_TEST) $(TARGET_STATIC_HASH_TEST)
 
 tags:
 	@ctags -R

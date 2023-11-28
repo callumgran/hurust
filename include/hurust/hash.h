@@ -104,7 +104,7 @@ size_t hash_long_double(long double key)
     return *(size_t *)&key;
 }
 
-size_t hash_str(char *str)
+size_t hash_str(const char *str)
 {
     size_t A = 1327217885;
     size_t k = 0;

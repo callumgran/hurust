@@ -85,17 +85,22 @@ static bool is_prime(size_t n)
         struct hr_allocator_t *allocator;       \
     } struct_prefix##_shashset_t;
 
-#define shashset_init(_hashset, _allocator, cap, _cmp, _hash)                                 \
-    ({                                                                                        \
-        (_hashset)->allocator = _allocator;                                                   \
-        (_hashset)->cap = cap;                                                                \
-        (_hashset)->size = 0;                                                                 \
-        (_hashset)->cmp = _cmp;                                                               \
-        (_hashset)->hash = _hash;                                                             \
-        (_hashset)->data = HR_ALLOC((_hashset)->_allocator, sizeof(*(_hashset)->data) * cap); \
+#define shashset_init(_hashset, _allocator, _cap, _cmp, _hash)                            \
+    ({                                                                                    \
+        size_t __cap = (_cap);                                                            \
+        (_hashset)->allocator = (_allocator);                                             \
+        while (!is_prime(__cap)) {                                                         \
+            __cap++;                                                                       \
+        }                                                                                 \
+        (_hashset)->cap = __cap;                                                         \
+        (_hashset)->size = 0;                                                             \
+        (_hashset)->cmp = (_cmp);                                                         \
+        (_hashset)->hash = (_hash);                                                       \
+        (_hashset)->data =                                                                \
+            HR_ALLOC((_hashset)->allocator, sizeof(*(_hashset)->data) * (_hashset)->cap); \
     })
 
-#define shashset_free(_hashset) HR_FREE((_hashset)->allocator, (_hashset)->data)
+#define shashset_free(_hashset) HR_DEALLOC((_hashset)->allocator, (_hashset)->data)
 
 #define shashset_insert(_hashset, _item)                             \
     ({                                                               \

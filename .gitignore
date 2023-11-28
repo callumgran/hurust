@@ -74,3 +74,6 @@ static_stack_test
 
 # Heap tests
 heap_test
+
+# Hash tests
+static_hashset_test
