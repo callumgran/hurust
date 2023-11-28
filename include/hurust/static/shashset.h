@@ -67,11 +67,11 @@ static bool is_prime(size_t n)
 }
 
 /**
- * \brief     A macro for defining a stack.
- * \note      This macro defines a stack with the given type and struct prefix.
+ * \brief     A macro for defining a hashset.
+ * \note      This macro defines a hashset with the given type and struct prefix.
  * \param[in] type The type of the stack.
- * \param[in] struct_prefix The prefix for the stack struct.
- * \note      The struct prefix parameter is used to define the stack struct
+ * \param[in] struct_prefix The prefix for the hashset struct.
+ * \note      The struct prefix parameter is used to define the hashset struct
  *            name as some types such as pointers and arrays cannot be used
  *            as struct names.
  */
@@ -85,6 +85,15 @@ static bool is_prime(size_t n)
         struct hr_allocator_t *allocator;       \
     } struct_prefix##_shashset_t;
 
+/**
+ * \brief     A macro for initializing a hashset.
+ * \note      This macro initializes a hashset with the given parameters.
+ * \param[in] hashset The hashset to initialize.
+ * \param[in] allocator The allocator to use for allocating memory.
+ * \param[in] cap The capacity of the hashset.
+ * \param[in] cmp The comparison function for the hashset.
+ * \param[in] hash The hash function for the hashset.
+ */
 #define shashset_init(_hashset, _allocator, _cap, _cmp, _hash)                            \
     ({                                                                                    \
         size_t __cap = (_cap);                                                            \
@@ -100,8 +109,20 @@ static bool is_prime(size_t n)
             HR_ALLOC((_hashset)->allocator, sizeof(*(_hashset)->data) * (_hashset)->cap); \
     })
 
+/**
+ * \brief     A macro for freeing a hashset.
+ * \note      This macro frees a hashset.
+ * \param[in] hashset The hashset to free.
+ */
 #define shashset_free(_hashset) HR_DEALLOC((_hashset)->allocator, (_hashset)->data)
 
+/**
+ * \brief     A macro for inserting an item into a hashset.
+ * \note      This macro inserts an item into a hashset.
+ * \param[in] hashset The hashset to insert into.
+ * \param[in] item The item to insert.
+ * \return    True if the item was inserted, false otherwise.
+ */
 #define shashset_insert(_hashset, _item)                             \
     ({                                                               \
         size_t _hash = (_hashset)->hash(_item);                      \
@@ -125,6 +146,13 @@ static bool is_prime(size_t n)
         _success;                                                    \
     })
 
+/**
+ * \brief     A macro for removing an item from a hashset.
+ * \note      This macro removes an item from a hashset.
+ * \param[in] hashset The hashset to remove from.
+ * \param[in] item The item to remove.
+ * \return    True if the item was removed, false otherwise.
+ */
 #define shashset_remove(_hashset, _item)                             \
     ({                                                               \
         size_t _hash = (_hashset)->hash(_item);                      \
@@ -146,6 +174,13 @@ static bool is_prime(size_t n)
         _success;                                                    \
     })
 
+/**
+ * \brief     A macro for determining if a hashset contains an item.
+ * \note      This macro determines if a hashset contains an item.
+ * \param[in] hashset The hashset to check.
+ * \param[in] item The item to check for.
+ * \return    True if the hashset contains the item, false otherwise.
+ */
 #define shashset_contains(_hashset, _item)                           \
     ({                                                               \
         size_t _hash = (_hashset)->hash(_item);                      \
@@ -165,17 +200,32 @@ static bool is_prime(size_t n)
         _success;                                                    \
     })
 
-#define shashset_clear(_hashset) \
-    {                            \
-        (_hashset)->size = 0;    \
-    }
-
+/**
+ * \brief     A macro for getting the size of a hashset.
+ * \note      This macro gets the size of a hashset.
+ * \param[in] hashset The hashset to get the size of.
+ */
 #define shashset_size(_hashset) ((_hashset)->size)
 
+/**
+ * \brief     A macro for determining if a hashset is empty.
+ * \note      This macro determines if a hashset is empty.
+ * \param[in] hashset The hashset to check.
+ */
 #define shashset_empty(_hashset) ((_hashset)->size == 0)
 
+/**
+ * \brief     A macro for determining the capacity of a hashset.
+ * \note      This macro determines the capacity of a hashset.
+ * \param[in] hashset The hashset to check.
+ */
 #define shashset_capacity(_hashset) ((_hashset)->cap)
 
+/**
+ * \brief     A macro for determining the load factor of a hashset.
+ * \note      This macro determines the load factor of a hashset.
+ * \param[in] hashset The hashset to check.
+ */
 #define shashset_load_factor(_hashset) ((float)(_hashset)->size / (_hashset)->cap)
 
 #endif // HURUST_STATIC_HASHSET_H
