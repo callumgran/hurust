@@ -39,6 +39,11 @@ int cmp_int(const int a, const int b)
     return a - b;
 }
 
+int cmp_u8(const uint8_t a, const uint8_t b)
+{
+    return a - b;
+}
+
 void test_int_hashset(void)
 {
     SHASHSET(int, int);
@@ -69,6 +74,38 @@ void test_int_hashset(void)
     shashset_free(&hashset);
 
     printf("SHASHSET(int, int) passed.\n");
+}
+
+void test_uint8_hashset(void)
+{
+    SHASHSET(uint8_t, u8);
+
+    struct u8_shashset_t hashset;
+    shashset_init(&hashset, HR_GLOBAL_ALLOCATOR, 50, cmp_u8, hash_unsigned_char);
+
+    for (int i = 0; i < 25; i++) {
+        shashset_insert(&hashset, i * 2);
+    }
+
+    for (int i = 0; i < 50; i++) {
+        if (i % 2 == 0 && i != 0) {
+            assert(shashset_contains(&hashset, i));
+        } else {
+            assert(!shashset_contains(&hashset, i));
+        }
+    }
+
+    for (int i = 0; i < 25; i++) {
+        shashset_remove(&hashset, i * 2);
+    }
+
+    for (int i = 1; i < 50; i++) {
+        assert(!shashset_contains(&hashset, i));
+    }
+
+    shashset_free(&hashset);
+
+    printf("SHASHSET(uint8_t, u8) passed.\n");
 }
 
 void test_str_hashset(void)
@@ -103,6 +140,7 @@ int main(void)
 {
     printf("Running hashset tests...\n");
     test_int_hashset();
+    test_uint8_hashset();
     test_str_hashset();
     printf("Done.\n");
     return 0;
