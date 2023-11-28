@@ -39,6 +39,7 @@ HURUST is a versatile, easy to use, header based GNU-C collections library.
 | Array         | Array                              | Static Array                    |
 | Queue         | FIFO                               | Static Circular Array           |
 | Stack         | LIFO                               | Static Array                    |
+| Hash Set      | Set                                | Static Hash Table               |
 
 ## Extra Features
 
