@@ -2,7 +2,6 @@
 # See LICENSE for license info
 
 OBJDIR = .obj
-SRC = src
 DIRS := $(shell find $(SRC) -type d)
 SRCS := $(shell find $(SRC) -type f -name "*.c")
 OBJS := $(SRCS:%.c=$(OBJDIR)/%.o)

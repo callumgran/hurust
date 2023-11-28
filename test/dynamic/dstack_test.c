@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "../../include/dynamic/dstack.h"
+#include "../../include/hurust/dynamic/dstack.h"
 
 void test_int_push_pop_get(void)
 {

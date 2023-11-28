@@ -36,7 +36,9 @@
 #ifndef HURUST_COMMON_H
 #define HURUST_COMMON_H
 
+#include <stdbool.h>
 #include <stddef.h>
+#include <stdint.h>
 
 #define swap(type, a, b)           \
     ({                             \
@@ -91,5 +93,15 @@
                                                 (structure)->cap * sizeof(*(structure)->data));   \
         }                                                                                         \
     }
+
+#define NULL_VAL(_val)                                                                   \
+    _Generic((_val), bool                                                                \
+             : false, char                                                               \
+             : '\0', signed char                                                         \
+             : '\0', unsigned char                                                       \
+             : '\0', short : 0, unsigned short : 0, int : 0, unsigned int : 0, long : 0, \
+               unsigned long : 0, long long : 0, unsigned long long : 0, float : 0.0f,   \
+               double : 0.0, long double : 0.0L, default                                 \
+             : NULL)
 
 #endif // HURUST_COMMON_H

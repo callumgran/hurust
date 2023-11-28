@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "../../include/dynamic/dqueue.h"
+#include "../../include/hurust/dynamic/dqueue.h"
 
 void test_int_push_pop_get(void)
 {

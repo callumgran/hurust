@@ -19,8 +19,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "../../include/dynamic/heap.h"
-#include "../../include/functional/lambda.h"
+#include "../../include/hurust/dynamic/heap.h"
+#include "../../include/hurust/functional/lambda.h"
 
 void test_int_push_pop_get(void)
 {

@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "../../include/static/sstack.h"
+#include "../../include/hurust/static/sstack.h"
 
 void test_int_push_pop_get(void)
 {
