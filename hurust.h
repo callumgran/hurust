@@ -139,27 +139,103 @@ HRAllocator *hr_current_allocator = &hr_default_allocator;
 
 #define HR_GLOBAL_ALLOCATOR hr_current_allocator
 
+size_t hash_char(char key)
+{
+    return (size_t)key;
+}
+
+size_t hash_short(short key)
+{
+    return (size_t)key;
+}
+
+size_t hash_int(int key)
+{
+    return (size_t)key;
+}
+
+size_t hash_long(long key)
+{
+    return (size_t)key;
+}
+
+size_t hash_long_long(long long key)
+{
+    return (size_t)key;
+}
+
+size_t hash_unsigned_char(unsigned char key)
+{
+    return (size_t)key;
+}
+
+size_t hash_unsigned_short(unsigned short key)
+{
+    return (size_t)key;
+}
+
+size_t hash_unsigned_int(unsigned int key)
+{
+    return (size_t)key;
+}
+
+size_t hash_unsigned_long(unsigned long key)
+{
+    return (size_t)key;
+}
+
+size_t hash_unsigned_long_long(unsigned long long key)
+{
+    return (size_t)key;
+}
+
+size_t hash_float(float key)
+{
+    return *(size_t *)&key;
+}
+
+size_t hash_double(double key)
+{
+    return *(size_t *)&key;
+}
+
+size_t hash_long_double(long double key)
+{
+    return *(size_t *)&key;
+}
+
+size_t hash_str(const char *str)
+{
+    size_t A = 1327217885;
+    size_t k = 0;
+    for (size_t i = 0; i < strlen(str); i++)
+        k += (k << 5) + str[i];
+
+    return k * A;
+}
+
 #ifdef HURUST_IMPLEMENTATION
-#       define HURUST_DYNAMIC_IMPLEMENTATION
-#       define HURUST_STATIC_IMPLEMENTATION
-#       define HURUST_FUNCTIONAL_LAMBDA_H
+#define HURUST_DYNAMIC_IMPLEMENTATION
+#define HURUST_STATIC_IMPLEMENTATION
+#define HURUST_FUNCTIONAL_LAMBDA_H
 #endif
 
 #ifdef HURUST_STATIC_IMPLEMENTATION
-#       define HURUST_STATIC_QUEUE_H
-#       define HURUST_STATIC_STACK_H
-#       define HURUST_ARRAY_H
+#define HURUST_STATIC_QUEUE_H
+#define HURUST_STATIC_STACK_H
+#define HURUST_ARRAY_H
+#define HURUST_STATIC_HASHSET_H
 #endif
 
 #ifdef HURUST_DYNAMIC_IMPLEMENTATION
-#       define HURUST_DYNAMIC_QUEUE_H
-#       define HURUST_DYNAMIC_STACK_H
-#       define HURUST_VECTOR_H
-#       define HURUST_HEAP_H
+#define HURUST_DYNAMIC_QUEUE_H
+#define HURUST_DYNAMIC_STACK_H
+#define HURUST_VECTOR_H
+#define HURUST_HEAP_H
 #endif
 
 #if defined(HURUST_ARRAY_H) || defined(HURUST_VECTOR_H)
-#       define HURUST_SORT_H
+#define HURUST_SORT_H
 #endif
 
 #ifdef HURUST_SORT_H
@@ -860,5 +936,129 @@ HRAllocator *hr_current_allocator = &hr_default_allocator;
     })
 
 #define heap_peek(_heap) ({ (_heap)->data[0]; })
+
+#endif
+
+#ifdef HURUST_STATIC_HASHSET_H
+static bool is_prime(size_t n)
+{
+    if (n <= 1) {
+        return false;
+    }
+
+    if (n <= 3) {
+        return true;
+    }
+
+    if (n % 2 == 0 || n % 3 == 0) {
+        return false;
+    }
+
+    for (size_t i = 5; i * i <= n; i += 6) {
+        if (n % i == 0 || n % (i + 2) == 0) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+#define SHASHSET(type, struct_prefix)           \
+    typedef struct struct_prefix##_shashset_t { \
+        type *data;                             \
+        size_t size;                            \
+        size_t cap;                             \
+        int (*cmp)(const type a, const type b); \
+        size_t (*hash)(const type a);           \
+        struct hr_allocator_t *allocator;       \
+    } struct_prefix##_shashset_t;
+
+#define shashset_init(_hashset, _allocator, _cap, _cmp, _hash)                            \
+    ({                                                                                    \
+        size_t __cap = (_cap);                                                            \
+        (_hashset)->allocator = (_allocator);                                             \
+        while (!is_prime(__cap)) {                                                        \
+            __cap++;                                                                      \
+        }                                                                                 \
+        (_hashset)->cap = __cap;                                                          \
+        (_hashset)->size = 0;                                                             \
+        (_hashset)->cmp = (_cmp);                                                         \
+        (_hashset)->hash = (_hash);                                                       \
+        (_hashset)->data =                                                                \
+            HR_ALLOC((_hashset)->allocator, sizeof(*(_hashset)->data) * (_hashset)->cap); \
+    })
+
+#define shashset_free(_hashset) HR_DEALLOC((_hashset)->allocator, (_hashset)->data)
+
+#define shashset_insert(_hashset, _item)                             \
+    ({                                                               \
+        size_t _hash = (_hashset)->hash(_item);                      \
+        size_t _index = _hash % (_hashset)->cap;                     \
+        size_t _i = _index;                                          \
+        bool _success = true;                                        \
+        while ((_hashset)->data[_i] != NULL_VAL(_item)) {            \
+            if ((_hashset)->cmp((_hashset)->data[_i], _item) == 0) { \
+                break;                                               \
+            }                                                        \
+            _i = (_i + 1) % (_hashset)->cap;                         \
+            if (_i == _index) {                                      \
+                _success = false;                                    \
+                break;                                               \
+            }                                                        \
+        }                                                            \
+        if (_success) {                                              \
+            (_hashset)->data[_i] = _item;                            \
+            (_hashset)->size++;                                      \
+        }                                                            \
+        _success;                                                    \
+    })
+
+#define shashset_remove(_hashset, _item)                             \
+    ({                                                               \
+        size_t _hash = (_hashset)->hash(_item);                      \
+        size_t _index = _hash % (_hashset)->cap;                     \
+        size_t _i = _index;                                          \
+        bool _success = false;                                       \
+        while ((_hashset)->data[_i] != NULL_VAL(_item)) {            \
+            if ((_hashset)->cmp((_hashset)->data[_i], _item) == 0) { \
+                (_hashset)->data[_i] = NULL_VAL(_item);              \
+                (_hashset)->size--;                                  \
+                _success = true;                                     \
+                break;                                               \
+            }                                                        \
+            _i = (_i + 1) % (_hashset)->cap;                         \
+            if (_i == _index) {                                      \
+                break;                                               \
+            }                                                        \
+        }                                                            \
+        _success;                                                    \
+    })
+
+#define shashset_contains(_hashset, _item)                           \
+    ({                                                               \
+        size_t _hash = (_hashset)->hash(_item);                      \
+        size_t _index = _hash % (_hashset)->cap;                     \
+        size_t _i = _index;                                          \
+        bool _success = false;                                       \
+        while ((_hashset)->data[_i] != NULL_VAL(_item)) {            \
+            if ((_hashset)->cmp((_hashset)->data[_i], _item) == 0) { \
+                _success = true;                                     \
+                break;                                               \
+            }                                                        \
+            _i = (_i + 1) % (_hashset)->cap;                         \
+            if (_i == _index) {                                      \
+                break;                                               \
+            }                                                        \
+        }                                                            \
+        _success;                                                    \
+    })
+
+#define shashset_size(_hashset) ((_hashset)->size)
+
+#define shashset_empty(_hashset) ((_hashset)->size == 0)
+
+#define shashset_capacity(_hashset) ((_hashset)->cap)
+
+#define shashset_load_factor(_hashset) ((float)(_hashset)->size / (_hashset)->cap)
 
 #endif
