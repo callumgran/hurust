@@ -29,6 +29,7 @@
     Callum Gran.
 
   MODIFICATIONS
+    01-Dec-23  C.Gran       Added hashset to file.
     27-Nov-23  C.Gran		Created file.
 
  *==========================================================================*/
@@ -215,27 +216,27 @@ size_t hash_str(const char *str)
 }
 
 #ifdef HURUST_IMPLEMENTATION
-#define HURUST_DYNAMIC_IMPLEMENTATION
-#define HURUST_STATIC_IMPLEMENTATION
-#define HURUST_FUNCTIONAL_LAMBDA_H
+#       define HURUST_DYNAMIC_IMPLEMENTATION
+#       define HURUST_STATIC_IMPLEMENTATION
+#       define HURUST_FUNCTIONAL_LAMBDA_H
 #endif
 
 #ifdef HURUST_STATIC_IMPLEMENTATION
-#define HURUST_STATIC_QUEUE_H
-#define HURUST_STATIC_STACK_H
-#define HURUST_ARRAY_H
-#define HURUST_STATIC_HASHSET_H
+#       define HURUST_STATIC_QUEUE_H
+#       define HURUST_STATIC_STACK_H
+#       define HURUST_ARRAY_H
+#       define HURUST_STATIC_HASHSET_H
 #endif
 
 #ifdef HURUST_DYNAMIC_IMPLEMENTATION
-#define HURUST_DYNAMIC_QUEUE_H
-#define HURUST_DYNAMIC_STACK_H
-#define HURUST_VECTOR_H
-#define HURUST_HEAP_H
+#       define HURUST_DYNAMIC_QUEUE_H
+#       define HURUST_DYNAMIC_STACK_H
+#       define HURUST_VECTOR_H
+#       define HURUST_HEAP_H
 #endif
 
 #if defined(HURUST_ARRAY_H) || defined(HURUST_VECTOR_H)
-#define HURUST_SORT_H
+#       define HURUST_SORT_H
 #endif
 
 #ifdef HURUST_SORT_H
@@ -940,7 +941,7 @@ size_t hash_str(const char *str)
 #endif
 
 #ifdef HURUST_STATIC_HASHSET_H
-static bool is_prime(size_t n)
+    static bool is_prime(size_t n)
 {
     if (n <= 1) {
         return false;
@@ -977,10 +978,10 @@ static bool is_prime(size_t n)
     ({                                                                                    \
         size_t __cap = (_cap);                                                            \
         (_hashset)->allocator = (_allocator);                                             \
-        while (!is_prime(__cap)) {                                                        \
-            __cap++;                                                                      \
+        while (!is_prime(__cap)) {                                                         \
+            __cap++;                                                                       \
         }                                                                                 \
-        (_hashset)->cap = __cap;                                                          \
+        (_hashset)->cap = __cap;                                                         \
         (_hashset)->size = 0;                                                             \
         (_hashset)->cmp = (_cmp);                                                         \
         (_hashset)->hash = (_hash);                                                       \
