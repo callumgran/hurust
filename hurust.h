@@ -36,6 +36,7 @@
 
 #include <stddef.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #define swap(type, a, b)           \
     ({                             \
