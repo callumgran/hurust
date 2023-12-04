@@ -216,6 +216,16 @@ size_t hash_str(const char *str)
     return k * A;
 }
 
+#define NULL_VAL(_val)                                                                   \
+    _Generic((_val), bool                                                                \
+             : false, char                                                               \
+             : '\0', signed char                                                         \
+             : '\0', unsigned char                                                       \
+             : '\0', short : 0, unsigned short : 0, int : 0, unsigned int : 0, long : 0, \
+               unsigned long : 0, long long : 0, unsigned long long : 0, float : 0.0f,   \
+               double : 0.0, long double : 0.0L, default                                 \
+             : NULL)
+
 #ifdef HURUST_IMPLEMENTATION
 #       define HURUST_DYNAMIC_IMPLEMENTATION
 #       define HURUST_STATIC_IMPLEMENTATION
